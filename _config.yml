@@ -2,10 +2,10 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+url: http://cuberoot-sw.github.com
+title: Cube Root Blog
+subtitle: RoR Experts
+author: Cube Root
 simple_search: http://google.com/search
 description:
 
