@@ -6,9 +6,8 @@ comments: true
 author: Meghali
 categories: 
 ---
-## Summary:
-This blog post is about setting up a vagrant box.Vagrants are useful to preserve the app-configurations 
-and easy to maintain.Once the vagrant is setup one can create a package out of it; which can be used as 
+This blog post is about setting up a vagrant box. Vagrants are useful to preserve the app-configurations 
+and easy to maintain. Once the vagrant is setup one can create a package out of it; which can be used as 
 an independent system with the app-configurations.
 Once a package is ready we can use it directly, we dont have to remember the gemset OR rvm etc.
 While sharing the APP we can simply share the package file and other person dont have to spend time on 
