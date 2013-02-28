@@ -2,7 +2,6 @@
 layout: post
 title: "Rails Memcacheing using Dalli"
 date: 2013-02-27 15:23
-comments: true
 author: Prachi
 categories:
 ---
