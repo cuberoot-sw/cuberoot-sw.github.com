@@ -10,7 +10,7 @@ categories:
 Dalli is a High performance memcached client for Ruby.
 ####Before using dalli -
 
-Dalli requires memcached 1.4+. Check the version using -
+Dalli requires memcached 1.4+. Check the version using :
 ```
   $ memcached -h
 ```
@@ -33,12 +33,12 @@ If memcached not running then start it on port 11211.
   $ /usr/local/bin/memcached -d -p 11211
 ```
 
-To Verify installations run
+To Verify installations run :
 ```
   $ gem install dalli
 ```
 
-Test it with a sample of code
+Test it with a sample of code on rails console :
 ```ruby
          require 'dalli'
           dc = Dalli::Client.new('localhost:11211')
@@ -60,14 +60,14 @@ In `config/environments/development.rb` :
 
   config.cache_store = :dalli_store, '127.0.0.1'
 ```
-  set server to localhost use `127.0.0.1`
+  set server to localhost use `127.0.0.1` .
 
   For ENV=production in `config/environments/production.rb`:
 ```ruby
   config.cache_store = :dalli_store, your_server
 ```
 
-To expire cache in  day
+To expire cache in  day :
 ```ruby
   config.cache_store = :dalli_store, '127.0.0.1', :expires_in => 1.day
 ```
