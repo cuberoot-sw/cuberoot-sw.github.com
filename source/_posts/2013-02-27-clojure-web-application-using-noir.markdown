@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Tutorial - Clojure Web Application Using Noir"
+title: "Tutorial 1 - Clojure Web Application Using Noir"
 date: 2013-02-27 15:24
 comments: true
 author: Deepali
