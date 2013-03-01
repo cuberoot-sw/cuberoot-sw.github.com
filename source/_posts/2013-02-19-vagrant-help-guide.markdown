@@ -10,20 +10,19 @@ categories:
 This blog post is about setting up a vagrant box.Vagrants are useful to preserve the app-configurations 
 and easy to maintain.Once the vagrant is setup one can create a package out of it; which can be used as 
 an independent system with the app-configurations.
-Once a package is ready we can use it directly, we dont have to remember the gemset OR rvm etc.
-While sharing the APP we can simply share the package file and other person dont have to spend time on 
-setting up the environment. 
+Once a package is ready we can use it directly, we don't have to remember the gemset OR rvm etc.
+While sharing the APP we can simply share the package file and all others can start using it directly.
 
 ## Pre-requisites:
-- VirtualBox is installed
-- vagrant gem is installed (gem install vagrant – supports ruby 1.9.x onwards)
+- Download [VirtualBox](http://www.macupdate.com/app/mac/24801/virtualbox) for Mac
+- Install gem 'vagrant'
 
 ### 1. Steps to setup a vagrant box
 1. Download one of the vagrant box from the list available at [lucid32.box](http://files.vagrantup.com/lucid32.box)
 2. Use that box to setup vagrant for your application 
-  $ vagrant box add blog ~/Downloads/lucid32.box
+  `$ vagrant box add blog ~/Downloads/lucid32.box`
 3. Initialize the vagrant box added
-$ vagrant init blog
+`$ vagrant init blog`
 This will create a Vagrantfile in your project-directory
 4. Verify the Vagrantfile 
 It should have a line with configuration ` config.vm.box = "blog" ` 
@@ -43,7 +42,7 @@ From this step on, follow the steps to setup a ubuntu machine for “ruby, rails
 It creates default package.box file in the current directory
 
 ### 2. How to use package.box created out of Vagrant
-  1) Go to you project directory and run
+  1) Go to your project directory and run
 <pre>
 $ vagrant box add my_box /path/to/the/package.box
 $ vagrant init my_box
@@ -60,3 +59,6 @@ $ cd /vagrant
   4) Ready to use
 From this step on start using it as usual terminal to start your rails server 
 i.e. rails server OR ./script/server
+
+### References:
+[RailsCasts Episode-292](http://railscasts.com/episodes/292-virtual-machines-with-vagrant)
