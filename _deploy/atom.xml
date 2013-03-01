@@ -4,7 +4,7 @@
   <title><![CDATA[Cube Root Blog]]></title>
   <link href="http://cuberoot-sw.github.com/atom.xml" rel="self"/>
   <link href="http://cuberoot-sw.github.com/"/>
-  <updated>2013-03-01T12:39:40+05:30</updated>
+  <updated>2013-03-01T12:52:27+05:30</updated>
   <id>http://cuberoot-sw.github.com/</id>
   <author>
     <name><![CDATA[Cube Root]]></name>
@@ -702,10 +702,10 @@ This will create a Vagrantfile in your project-directory</li>
 <li>Verify the Vagrantfile
 It should have a line with configuration <code>config.vm.box = "blog"</code></li>
 <li>Start vagrant
-<code>$vagrant up</code></li>
+<code>$ vagrant up</code></li>
 <li>Connect to vagrant
 Once the vagrant is up successfully, try connecting it using ssh command
-<code>$vagrant ssh</code>
+<code>$ vagrant ssh</code>
 This will connect us to the vagrant shell prompt</li>
 <li>Usual steps to setup all configuration required for our Application
 From this step on, follow the steps to setup a ubuntu machine for “ruby, rails, mysql” etc. environment</li>
@@ -714,8 +714,8 @@ From this step on, follow the steps to setup a ubuntu machine for “ruby, rails
 
 
 <pre>
-  $vagrant halt (stop the vagrant, before packaging it)
-  $vagrant package
+  $ vagrant halt (stop the vagrant, before packaging it)
+  $ vagrant package
 </pre>
 
 

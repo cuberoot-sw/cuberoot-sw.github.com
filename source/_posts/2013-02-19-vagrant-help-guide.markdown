@@ -26,17 +26,17 @@ This will create a Vagrantfile in your project-directory
 4. Verify the Vagrantfile 
 It should have a line with configuration ` config.vm.box = "blog" ` 
 5. Start vagrant
-  `$vagrant up`
+  `$ vagrant up`
 6. Connect to vagrant
 Once the vagrant is up successfully, try connecting it using ssh command 
-  `$vagrant ssh`
+  `$ vagrant ssh`
 This will connect us to the vagrant shell prompt
 7. Usual steps to setup all configuration required for our Application
 From this step on, follow the steps to setup a ubuntu machine for “ruby, rails, mysql” etc. environment
 8. Create vagrant-package.box
 <pre>
-  $vagrant halt (stop the vagrant, before packaging it)
-  $vagrant package
+  $ vagrant halt (stop the vagrant, before packaging it)
+  $ vagrant package
 </pre>
 It creates default package.box file in the current directory
 
