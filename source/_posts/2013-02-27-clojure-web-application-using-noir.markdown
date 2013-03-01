@@ -47,6 +47,16 @@ Created website has following structure :-
           project.clj
           README.md
 ```
+
+The `project.clj` file is used for building the application and
+managing dependencies by Leiningen.
+
+Under the `src` folder, we have the folder  `finance_manager` which contains `server.clj`. This file contains the entry point to our application. It loads up all the views and provides a main function which can be used to start the application.
+
+The `models` folder is used to keep the data such as code for the database access and table management. The `views` folder contains the namespaces describing the pages of our application and their supporting code. The template contains `common.clj` which provides a basic layout and any code shared between the pages. The `welcome.clj` is the namespace where an example page is defined and you can create your own pages under this namespace.
+
+The `resource/public` folder contains the stylesheets and javasript.
+
 Execute the following command :-
 ```
        $ lein run   
