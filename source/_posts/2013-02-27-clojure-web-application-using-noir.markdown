@@ -7,8 +7,7 @@ author: Deepali
 categories: 
 ---
 
-Here is a brief walkthrough of creating a simple website using Noir
-framework.
+I am going to do a series of blog posts on using Noir framework to create a simple website. Here is part 1 of the tutorial.
 
 #### We are going to cover following points in this tutorial :
 
