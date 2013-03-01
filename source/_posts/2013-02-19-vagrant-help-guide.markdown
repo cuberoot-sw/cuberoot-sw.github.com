@@ -14,8 +14,8 @@ Once a package is ready we can use it directly, we don't have to remember the ge
 While sharing the APP we can simply share the package file and all others can start using it directly.
 
 ## Pre-requisites:
-- Download [VirtualBox](http://www.macupdate.com/app/mac/24801/virtualbox) for Mac
-- Install gem 'vagrant'
+- Install [VirtualBox](http://www.macupdate.com/app/mac/24801/virtualbox)
+- Install 'vagrant' gem
 
 ### 1. Steps to setup a vagrant box
 1. Download one of the vagrant box from the list available at [lucid32.box](http://files.vagrantup.com/lucid32.box)
