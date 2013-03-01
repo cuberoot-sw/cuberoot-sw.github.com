@@ -1,0 +1,1009 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Cube Root Blog</title>
+  <meta name="author" content="Cube Root">
+
+  
+  <meta name="description" content="Here is a brief walkthrough of creating a simple website using Noir
+framework. Now we will create a simple finance manager blog. The easiest way to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://cuberoot-sw.github.com/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Cube Root Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37798927-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Cube Root Blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:cuberoot-sw.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/27/clojure-web-application-using-noir/">Tutorial - Clojure Web Application Using Noir</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-27T15:24:00+05:30" pubdate data-updated="true">Feb 27<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here is a brief walkthrough of creating a simple website using Noir
+framework.</p>
+
+<p>Now we will create a simple finance manager blog.</p>
+
+<p>The easiest way to get Noir setup is to use
+   <a href="https://github.com/technomancy/leiningen/">Leiningen</a>. Then execute Following Command In Terminal</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ lein new noir finance_manager
+</span><span class='line'>Generating a lovely new Noir project named testing...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above command create a <code>finance_manager website</code> in a specified directory.</p>
+
+<p>Created website has following structure :-</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   /finance_manager
+</span><span class='line'>      --resources/
+</span><span class='line'>       --public/
+</span><span class='line'>           --css/reset.css
+</span><span class='line'>           --img/
+</span><span class='line'>           --js/
+</span><span class='line'>       --src/
+</span><span class='line'>         --finance-manager/
+</span><span class='line'>         --models/
+</span><span class='line'>         --views/ common.clj
+</span><span class='line'>                 welcome.clj
+</span><span class='line'>         server.clj
+</span><span class='line'>       --test/
+</span><span class='line'>         --finance_manager/
+</span><span class='line'>      project.clj
+</span><span class='line'>      README.md</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Execute the following command :-</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   $ lein run   
+</span><span class='line'>   Starting server...
+</span><span class='line'>   2012-08-16 09:39:22.479:INFO::Logging to STDERR via org.mortbay.log.StdErrLog
+</span><span class='line'>   Server started on port [8080].
+</span><span class='line'>   You can view the site at http://localhost:8080
+</span><span class='line'>   #&lt;Server Server@2206270b&gt;
+</span><span class='line'>   2012-08-16 09:39:22.480:INFO::jetty-6.1.25
+</span><span class='line'>   2012-08-16 09:39:22.521:INFO::Started SocketConnector@0.0.0.0:8080</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>lein run</code> run the -main function in our finance_manager namespace.</p>
+
+<p>Open the browser and run :-</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  localhost:8080</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For creating pages :-</p>
+
+<p> Open <code>src/views/welcome.clj</code> file. And create a homepage of the
+website.</p>
+
+<p> For creating pages <code>defpage</code> macro is used which create a Compojure
+route for the specified url. <code>defpage</code> has following syntax.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="p">(</span><span class="nf">defpage</span> <span class="nv">url</span> <span class="nv">params</span> <span class="nv">content</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="p">(</span><span class="nf">defpage</span> <span class="s">&quot;/homepage&quot;</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">[</span><span class="ss">:h3</span> <span class="s">&quot;Finance Manager&quot;</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Open the browser and run the following</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="nv">localhost</span><span class="ss">:8080/homepage</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Design a form which will provide the User Interface to add the Monthly
+Budget.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="p">(</span><span class="nf">defpage</span> <span class="s">&quot;/addbudget&quot;</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">error</span><span class="p">]}</span>
+</span><span class='line'>   <span class="p">(</span><span class="nf">common/layout</span>
+</span><span class='line'>     <span class="p">[</span><span class="ss">:h2</span> <span class="s">&quot;Add Monthly Budget&quot;</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">[</span><span class="ss">:div.error</span> <span class="nv">error</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">form-to</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/addbudget&quot;</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;budget_date&quot;</span> <span class="s">&quot;Select Budget Date&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">text-field</span> <span class="s">&quot;budget_date&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;budget_amt&quot;</span> <span class="s">&quot;Budget Amount&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">text-field</span> <span class="s">&quot;budget_amt&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">submit-button</span> <span class="s">&quot;Add Budget&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">reset-button</span> <span class="s">&quot;Cancel&quot;</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">)</span>
+</span><span class='line'>   <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Design the another page for POST which contain the server code to handle
+the input coming from addbudget page.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'> <span class="p">(</span><span class="nf">defpage</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/addbudget&quot;</span><span class="p">]</span> <span class="nv">budget</span>
+</span><span class='line'>   <span class="p">(</span><span class="nf">common/layout</span>
+</span><span class='line'>     <span class="p">[</span><span class="ss">:div</span> <span class="p">(</span><span class="ss">:budget_date</span> <span class="nv">budget</span><span class="p">)]</span>
+</span><span class='line'>     <span class="p">[</span><span class="ss">:div</span> <span class="p">(</span><span class="ss">:budget_amt</span> <span class="nv">budget</span><span class="p">)]</span>
+</span><span class='line'>   <span class="p">)</span>
+</span><span class='line'> <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above page simply display the values enter by the user on the page.</p>
+
+<p>Open the browser and run</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="nv">localhost</span><span class="ss">:8080/addbudget</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will display the page containing UI to add budget values.</p>
+
+<p>To save the values in the database we have to create the databse and
+setup the connection with the database.</p>
+
+<p>Follow the following steps for Database Access.</p>
+
+<p>There are several Clojure libraries availale for dealing with databse.
+In this tutorial we are using <code>clojure.data.jdbc</code> and MySql databse.</p>
+
+<p>We will create a new namespace under the <code>src/finance_manager/models</code>.
+We call this namespace db. The namespace will live in a file called
+<code>db.clj</code> under <code>src/finance_manager/models</code> directory.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">finance_manager.models.db</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.java.jdbc</span> <span class="ss">:as</span> <span class="nv">sql</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we will define our database connection in this file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">db</span>
+</span><span class='line'>  <span class="p">{</span><span class="ss">:subprotocol</span> <span class="s">&quot;mysql&quot;</span>
+</span><span class='line'>   <span class="ss">:subname</span> <span class="s">&quot;//localhost:3306/finance_manager_db&quot;</span>
+</span><span class='line'>   <span class="ss">:user</span> <span class="s">&quot;username&quot;</span>
+</span><span class='line'>   <span class="ss">:password</span> <span class="s">&quot;private&quot;</span><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now add dependencies in <code>project.clj</code> file for database connection.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">[</span><span class="nv">org.clojure/java.jdbc</span> <span class="s">&quot;0.2.3&quot;</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="nv">mysql/mysql-connector-java</span> <span class="s">&quot;5.1.6&quot;</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Create a table for budget in <code>finance_manager_db</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">create-budget-table</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">sql/with-connection</span>
+</span><span class='line'>      <span class="nv">db</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">sql/create-table</span>
+</span><span class='line'>        <span class="ss">:budget</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:id</span> <span class="ss">:serial</span> <span class="s">&quot;PRIMARY KEY&quot;</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:budget_date</span> <span class="s">&quot;date&quot;</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:budget_amt</span> <span class="s">&quot;double&quot;</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">)</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now open <code>src/finance_manager/server.clj</code> file.</p>
+
+<p>Write a function that call this <code>create-budget-table</code> function. and call
+that function in -main function.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">finance_manager.models.db</span> <span class="ss">:as</span> <span class="nv">db</span><span class="p">])</span>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">init</span>
+</span><span class='line'>  <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">db/create-budget-table</span><span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">-main</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">init</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now start REPL session and execute following command in it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">$</span> <span class="nv">lein</span> <span class="nv">repl</span>
+</span><span class='line'><span class="nv">nREPL</span> <span class="nv">server</span> <span class="nv">started</span> <span class="nv">on</span> <span class="nv">port</span> <span class="mi">53376</span>
+</span><span class='line'><span class="nv">REPL-y</span> <span class="mf">0.1</span><span class="nv">.9</span>
+</span><span class='line'><span class="nv">Clojure</span> <span class="mf">1.4</span><span class="nv">.0</span>
+</span><span class='line'>    <span class="nv">Exit</span><span class="err">:</span> <span class="nv">Control+D</span> <span class="nb">or </span><span class="p">(</span><span class="nf">exit</span><span class="p">)</span> <span class="nb">or </span><span class="p">(</span><span class="nf">quit</span><span class="p">)</span>
+</span><span class='line'><span class="nv">Commands</span><span class="err">:</span> <span class="p">(</span><span class="nf">user/help</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">Docs</span><span class="err">:</span> <span class="p">(</span><span class="nb">doc </span><span class="nv">function-name-here</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nb">find-doc </span><span class="s">&quot;part-of-name-here&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="nv">Source</span><span class="err">:</span> <span class="p">(</span><span class="nf">source</span> <span class="nv">function-name-here</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nf">user/sourcery</span> <span class="nv">function-name-here</span><span class="p">)</span>
+</span><span class='line'> <span class="nv">Javadoc</span><span class="err">:</span> <span class="p">(</span><span class="nf">javadoc</span> <span class="nv">java-object-or-class-here</span><span class="p">)</span>
+</span><span class='line'><span class="nv">Examples</span> <span class="nv">from</span> <span class="nv">clojuredocs.org</span><span class="err">:</span> <span class="p">[</span><span class="nv">clojuredocs</span> <span class="nb">or </span><span class="nv">cdoc</span><span class="p">]</span>
+</span><span class='line'>          <span class="p">(</span><span class="nf">user/clojuredocs</span> <span class="nv">name-here</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nf">user/clojuredocs</span> <span class="s">&quot;ns-here&quot;</span> <span class="s">&quot;name-here&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nv">finance_manager.server=&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">finance_manager.server=&gt;</span> <span class="p">(</span><span class="nf">finance_manager.server/-main</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>(finance_manager.server/-main)</code> it will execute the -main function and
+create a budget table in database.</p>
+
+<p>Now open <code>src/finance_manager/models/db.clj</code> file and write the function
+to add the budget record in the budget table.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">add-budget</span> <span class="p">[</span><span class="nv">budget</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">sql/with-connection</span>
+</span><span class='line'>    <span class="nv">db</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">sql/insert-record</span> <span class="ss">:budget</span> <span class="nv">budget</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now modify our <code>[:post "/addbudget"]</code> page to insert budget record.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/addbudget&quot;</span><span class="p">]</span> <span class="nv">budget</span>
+</span><span class='line'> <span class="p">(</span><span class="nf">let</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">try</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">db/add-budget</span> <span class="nv">budget</span><span class="p">)</span>
+</span><span class='line'>             <span class="p">(</span><span class="nf">resp/redirect</span> <span class="s">&quot;/homepage&quot;</span><span class="p">)</span>
+</span><span class='line'>             <span class="p">(</span><span class="nf">catch</span> <span class="nv">Exception</span> <span class="nv">ex</span>
+</span><span class='line'>               <span class="p">(</span><span class="nf">render</span> <span class="s">&quot;/addbudget&quot;</span> <span class="p">(</span><span class="nb">assoc </span><span class="nv">budget</span> <span class="ss">:error</span> <span class="p">(</span><span class="nf">.getMessage</span> <span class="nv">ex</span><span class="p">)))</span>
+</span><span class='line'>             <span class="p">)</span>
+</span><span class='line'>     <span class="p">)</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now create a page that will display list of all added budgets.</p>
+
+<p>So first write a function in <code>src/finance_manager/models/db.clj</code> file to
+get all records from database.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="p">(</span><span class="kd">defn </span><span class="nv">db-read</span> <span class="p">[</span><span class="nv">query</span> <span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">sql/with-connection</span>
+</span><span class='line'>    <span class="nv">db</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">sql/with-query-results</span>
+</span><span class='line'>      <span class="nv">res</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">vec</span> <span class="p">(</span><span class="nb">cons </span><span class="nv">query</span> <span class="nv">args</span><span class="p">))</span> <span class="p">(</span><span class="nb">doall </span><span class="nv">res</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="s">&quot;/viewbudget&quot;</span> <span class="p">[]</span>
+</span><span class='line'> <span class="p">(</span><span class="nf">common/layout</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">budget</span> <span class="p">(</span><span class="nf">db/db-read</span> <span class="s">&quot;select * from budget&quot;</span><span class="p">)]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">html</span>
+</span><span class='line'>      <span class="p">[</span><span class="ss">:h3</span> <span class="s">&quot;Budget List Page&quot;</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">[</span><span class="ss">:table</span><span class="p">{</span><span class="ss">:border=</span><span class="s">&quot;1&quot;</span><span class="p">}</span>
+</span><span class='line'>       <span class="p">[</span><span class="ss">:tr</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:th</span> <span class="s">&quot;Budget ID&quot;</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:th</span> <span class="s">&quot;Budget Date&quot;</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:th</span> <span class="s">&quot;Budget Amount&quot;</span><span class="p">]</span>
+</span><span class='line'>       <span class="p">]</span>
+</span><span class='line'>       <span class="p">(</span><span class="nb">for </span><span class="p">[</span><span class="nv">bgt</span> <span class="nv">budget</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:tr</span>
+</span><span class='line'>          <span class="p">[</span><span class="ss">:td</span> <span class="p">(</span><span class="ss">:id</span> <span class="nv">bgt</span><span class="p">)]</span>
+</span><span class='line'>          <span class="p">[</span><span class="ss">:td</span> <span class="p">(</span><span class="ss">:budget_date</span> <span class="nv">bgt</span><span class="p">)]</span>
+</span><span class='line'>          <span class="p">[</span><span class="ss">:td</span> <span class="p">(</span><span class="ss">:budget_amt</span> <span class="nv">bgt</span><span class="p">)]</span>
+</span><span class='line'>         <span class="p">]</span>
+</span><span class='line'>       <span class="p">)]</span>
+</span><span class='line'>     <span class="p">)</span>
+</span><span class='line'>   <span class="p">)</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now add links on homepage to add the budget and to view the budget.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'> <span class="p">(</span><span class="ss">:use</span>  <span class="nv">hiccup.element</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'> <span class="p">(</span><span class="nf">defpage</span> <span class="s">&quot;/homepage&quot;</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">common/layout</span>
+</span><span class='line'>    <span class="p">[</span><span class="ss">:h3</span> <span class="s">&quot;Finance Manager&quot;</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">html</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">link-to</span> <span class="s">&quot;/adbudget&quot;</span> <span class="s">&quot;Add Budget&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">link-to</span> <span class="s">&quot;/viewbudget&quot;</span> <span class="s">&quot;View Budget&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Apply Validations on form.</p>
+
+<p>Open <code>src/finance_manager/views/welcome.clj</code> file write following code
+in it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">noir.validation</span> <span class="ss">:as</span> <span class="nv">vali</span><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">valid-budget?</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">budget_date</span> <span class="nv">budget_amt</span><span class="p">]}]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">vali/rule</span> <span class="p">(</span><span class="nf">vali/has-value?</span> <span class="nv">budget_date</span><span class="p">)</span>
+</span><span class='line'>             <span class="p">[</span><span class="ss">:budget_date</span> <span class="s">&quot;Budget Date Is Required.&quot;</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">vali/rule</span> <span class="p">(</span><span class="nf">vali/has-value?</span> <span class="nv">budget_amt</span><span class="p">)</span>
+</span><span class='line'>             <span class="p">[</span><span class="ss">:budget_amt</span> <span class="s">&quot;Budget Amount Is Required.&quot;</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nf">vali/errors?</span> <span class="ss">:budget_date</span> <span class="ss">:budget_amt</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We will need a helper for displaying the error on the page:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defpartial</span> <span class="nv">error-item</span> <span class="p">[[</span><span class="nv">first-error</span><span class="p">]]</span>
+</span><span class='line'>  <span class="p">[</span><span class="ss">:p.error</span> <span class="nv">first-error</span><span class="p">]</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Modify the <code>/addbudget</code> page as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="s">&quot;/addbudget&quot;</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">error</span><span class="p">]}</span>
+</span><span class='line'>   <span class="p">(</span><span class="nf">common/layout</span>
+</span><span class='line'>     <span class="p">[</span><span class="ss">:h2</span> <span class="s">&quot;Add Monthly Budget&quot;</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">[</span><span class="ss">:div.error</span> <span class="nv">error</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">form-to</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/addbudget&quot;</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">vali/on-error</span> <span class="ss">:budget_date</span> <span class="nv">error-item</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;budget_date&quot;</span> <span class="s">&quot;Select Budget Date&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">text-field</span> <span class="s">&quot;budget_date&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">vali/on-error</span> <span class="ss">:budget_amt</span> <span class="nv">error-item</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;budget_amt&quot;</span> <span class="s">&quot;Budget Amount&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">text-field</span> <span class="s">&quot;budget_amt&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">submit-button</span> <span class="s">&quot;Add Budget&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">reset-button</span> <span class="s">&quot;Cancel&quot;</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">)</span>
+</span><span class='line'>   <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Summary</h4>
+
+<p>In this section we covered following topics :</p>
+
+<ul>
+<li>Create simple website using Noir.</li>
+<li>Create Pages.</li>
+<li>Create Pages for User Interface.</li>
+<li>Database Connection.</li>
+<li>Form Validation.</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/27/rails-memcacheing-using-dalli/">Rails Memcacheing Using Dalli</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-27T15:23:00+05:30" pubdate data-updated="true">Feb 27<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Dalli is a High performance memcached client for Ruby.</p>
+
+<h4>Before using dalli -</h4>
+
+<p>Dalli requires memcached 1.4+. Check the version using :</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  $ memcached -h</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>memcached -h</code> shows memcached version and help .</p>
+
+<p>If version is not 1.4+ then install memcached 1.4.x with on mac.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  $ brew install memcached</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can check memcached is running on your machine or not by command -</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  $ ps -ax | grep memcached
+</span><span class='line'>    1455 ??         0:00.90 /usr/local/bin/memcached -d -p 11211
+</span><span class='line'>    7629 ttys009    0:00.00 grep memcached</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If memcached not running then start it on port 11211.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  $ /usr/local/bin/memcached -d -p 11211</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To Verify installations run :</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  $ gem install dalli</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Test it with a sample of code on rails console :</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>     <span class="nb">require</span> <span class="s1">&#39;dalli&#39;</span>
+</span><span class='line'>      <span class="n">dc</span> <span class="o">=</span> <span class="ss">Dalli</span><span class="p">:</span><span class="ss">:Client</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;localhost:11211&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">dc</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="mi">123</span><span class="p">)</span>
+</span><span class='line'>      <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'>      <span class="n">dc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="o">=&gt;</span> <span class="mi">123</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Using &#8216;Dalli&#8217; in your rails 3.X application -</h4>
+
+<p>Add <code>gem dalli</code>  in your Gemfile.</p>
+
+<p>Run <code>bundle install</code></p>
+
+<p>In <code>config/environments/development.rb</code> :</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="c1"># Global enable/disable all memcached usage</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">perform_caching</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">cache_store</span> <span class="o">=</span> <span class="ss">:dalli_store</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  set server to localhost use <code>127.0.0.1</code> .</p>
+
+<p>  For ENV=production in <code>config/environments/production.rb</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">cache_store</span> <span class="o">=</span> <span class="ss">:dalli_store</span><span class="p">,</span> <span class="n">your_server</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To expire cache in  day :</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">cache_store</span> <span class="o">=</span> <span class="ss">:dalli_store</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="ss">:expires_in</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="o">.</span><span class="n">day</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, you can cache data by using Rails Cache .</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/19/vagrant-help-guide/">Vagrant Help Guide</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-19T17:25:00+05:30" pubdate data-updated="true">Feb 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This blog post is about setting up a vagrant box. Vagrants are useful to preserve the app-configurations
+and easy to maintain. Once the vagrant is setup one can create a package out of it; which can be used as
+an independent system with the app-configurations.
+Once a package is ready we can use it directly, we don&#8217;t have to remember the gemset OR rvm etc.
+While sharing the APP we can simply share the package file and all others can start using it directly.</p>
+
+<h2>Pre-requisites:</h2>
+
+<ul>
+<li>Install <a href="http://www.macupdate.com/app/mac/24801/virtualbox">VirtualBox</a></li>
+<li>Install &#8216;vagrant&#8217; gem</li>
+</ul>
+
+
+<h3>1. Steps to setup a vagrant box</h3>
+
+<ol>
+<li>Download one of the vagrant box from the list available at <a href="http://files.vagrantup.com/lucid32.box">lucid32.box</a></li>
+<li>Use that box to setup vagrant for your application
+<code>$ vagrant box add blog ~/Downloads/lucid32.box</code></li>
+<li>Initialize the vagrant box added
+<code>$ vagrant init blog</code>
+This will create a Vagrantfile in your project-directory</li>
+<li>Verify the Vagrantfile
+It should have a line with configuration <code>config.vm.box = "blog"</code></li>
+<li>Start vagrant
+<code>$vagrant up</code></li>
+<li>Connect to vagrant
+Once the vagrant is up successfully, try connecting it using ssh command
+<code>$vagrant ssh</code>
+This will connect us to the vagrant shell prompt</li>
+<li>Usual steps to setup all configuration required for our Application
+From this step on, follow the steps to setup a ubuntu machine for “ruby, rails, mysql” etc. environment</li>
+<li>Create vagrant-package.box</li>
+</ol>
+
+
+<pre>
+  $vagrant halt (stop the vagrant, before packaging it)
+  $vagrant package
+</pre>
+
+
+<p>It creates default package.box file in the current directory</p>
+
+<h3>2. How to use package.box created out of Vagrant</h3>
+
+<p>  1) Go to your project directory and run</p>
+
+<pre>
+$ vagrant box add my_box /path/to/the/package.box
+$ vagrant init my_box
+</pre>
+
+
+<p>  2) Edit the &#8220;Vagrantfile&#8221; created at project directory, with below line</p>
+
+<pre><code>From : #config.vm.forward_port 80, 8080
+To: config.vm.forward_port 3000, 3000
+</code></pre>
+
+<p>  3) Running it</p>
+
+<pre>
+$ vagrant up
+$ vagrant ssh
+$ cd /vagrant
+</pre>
+
+
+<p>  4) Ready to use
+From this step on start using it as usual terminal to start your rails server
+i.e. rails server OR ./script/server</p>
+
+<h3>References:</h3>
+
+<p><a href="http://railscasts.com/episodes/292-virtual-machines-with-vagrant">RailsCasts Episode-292</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/15/hello-world/">Hello World!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-15T11:28:00+05:30" pubdate data-updated="true">Feb 15<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Thank you for visiting. We are a group of passionate RoR developers based in Pune, India. Please visit our <a href="http://cuberoot.in">web site</a> to know more about us.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/clojure-web-application-using-noir/">Tutorial - Clojure Web Application Using Noir</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/rails-memcacheing-using-dalli/">Rails Memcacheing using Dalli</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/19/vagrant-help-guide/">Vagrant Help Guide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/15/hello-world/">Hello World!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Cube Root -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

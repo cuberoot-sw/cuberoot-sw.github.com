@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Vagrant Help Guide - Cube Root Blog</title>
+  <meta name="author" content="Cube Root">
+
+  
+  <meta name="description" content="This blog post is about setting up a vagrant box. Vagrants are useful to preserve the app-configurations
+and easy to maintain. Once the vagrant is &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://cuberoot-sw.github.com/blog/2013/02/19/vagrant-help-guide/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Cube Root Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37798927-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Cube Root Blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:cuberoot-sw.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Vagrant Help Guide</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-19T17:25:00+05:30" pubdate data-updated="true">Feb 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This blog post is about setting up a vagrant box. Vagrants are useful to preserve the app-configurations
+and easy to maintain. Once the vagrant is setup one can create a package out of it; which can be used as
+an independent system with the app-configurations.
+Once a package is ready we can use it directly, we don&#8217;t have to remember the gemset OR rvm etc.
+While sharing the APP we can simply share the package file and all others can start using it directly.</p>
+
+<h2>Pre-requisites:</h2>
+
+<ul>
+<li>Install <a href="http://www.macupdate.com/app/mac/24801/virtualbox">VirtualBox</a></li>
+<li>Install &#8216;vagrant&#8217; gem</li>
+</ul>
+
+
+<h3>1. Steps to setup a vagrant box</h3>
+
+<ol>
+<li>Download one of the vagrant box from the list available at <a href="http://files.vagrantup.com/lucid32.box">lucid32.box</a></li>
+<li>Use that box to setup vagrant for your application
+<code>$ vagrant box add blog ~/Downloads/lucid32.box</code></li>
+<li>Initialize the vagrant box added
+<code>$ vagrant init blog</code>
+This will create a Vagrantfile in your project-directory</li>
+<li>Verify the Vagrantfile
+It should have a line with configuration <code>config.vm.box = "blog"</code></li>
+<li>Start vagrant
+<code>$vagrant up</code></li>
+<li>Connect to vagrant
+Once the vagrant is up successfully, try connecting it using ssh command
+<code>$vagrant ssh</code>
+This will connect us to the vagrant shell prompt</li>
+<li>Usual steps to setup all configuration required for our Application
+From this step on, follow the steps to setup a ubuntu machine for “ruby, rails, mysql” etc. environment</li>
+<li>Create vagrant-package.box</li>
+</ol>
+
+
+<pre>
+  $vagrant halt (stop the vagrant, before packaging it)
+  $vagrant package
+</pre>
+
+
+<p>It creates default package.box file in the current directory</p>
+
+<h3>2. How to use package.box created out of Vagrant</h3>
+
+<p>  1) Go to your project directory and run</p>
+
+<pre>
+$ vagrant box add my_box /path/to/the/package.box
+$ vagrant init my_box
+</pre>
+
+
+<p>  2) Edit the &#8220;Vagrantfile&#8221; created at project directory, with below line</p>
+
+<pre><code>From : #config.vm.forward_port 80, 8080
+To: config.vm.forward_port 3000, 3000
+</code></pre>
+
+<p>  3) Running it</p>
+
+<pre>
+$ vagrant up
+$ vagrant ssh
+$ cd /vagrant
+</pre>
+
+
+<p>  4) Ready to use
+From this step on start using it as usual terminal to start your rails server
+i.e. rails server OR ./script/server</p>
+
+<h3>References:</h3>
+
+<p><a href="http://railscasts.com/episodes/292-virtual-machines-with-vagrant">RailsCasts Episode-292</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Meghali</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-19T17:25:00+05:30" pubdate data-updated="true">Feb 19<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://cuberoot-sw.github.com/blog/2013/02/19/vagrant-help-guide/" data-via="" data-counturl="http://cuberoot-sw.github.com/blog/2013/02/19/vagrant-help-guide/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/15/hello-world/" title="Previous Post: Hello World!">&laquo; Hello World!</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/02/27/rails-memcacheing-using-dalli/" title="Next Post: Rails Memcacheing using Dalli">Rails Memcacheing using Dalli &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/clojure-web-application-using-noir/">Tutorial - Clojure Web Application Using Noir</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/rails-memcacheing-using-dalli/">Rails Memcacheing using Dalli</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/19/vagrant-help-guide/">Vagrant Help Guide</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/15/hello-world/">Hello World!</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Cube Root -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

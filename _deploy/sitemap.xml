@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://cuberoot-sw.github.com/blog/2013/02/15/hello-world/</loc>
+        <lastmod>2013-03-01T12:35:57+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://cuberoot-sw.github.com/blog/2013/02/19/vagrant-help-guide/</loc>
+        <lastmod>2013-03-01T12:38:01+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://cuberoot-sw.github.com/blog/2013/02/27/rails-memcacheing-using-dalli/</loc>
+        <lastmod>2013-03-01T12:35:57+05:30</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://cuberoot-sw.github.com/blog/2013/02/27/clojure-web-application-using-noir/
+        </loc>
+        <lastmod>2013-03-01T12:35:57+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://cuberoot-sw.github.com/blog/archives/</loc>
+        <lastmod>2013-03-01T12:38:01+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://cuberoot-sw.github.com/</loc>
+        <lastmod>2013-03-01T12:38:01+05:30</lastmod>
+    </url>
+    <url>
+        <loc>http://cuberoot-sw.github.com/robots.txt</loc>
+        <lastmod>2013-03-01T12:35:57+05:30</lastmod>
+    </url>
+</urlset>

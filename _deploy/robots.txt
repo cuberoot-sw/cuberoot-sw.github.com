@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://cuberoot-sw.github.com/sitemap.xml 
