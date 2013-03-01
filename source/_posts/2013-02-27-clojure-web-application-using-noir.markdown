@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Tutorial - Clojure Web Application Using Noir"
+title: "Tutorial 1 - Clojure Web Application Using Noir"
 date: 2013-02-27 15:24
 author: Deepali
 categories: 
@@ -8,6 +8,14 @@ categories:
 
 Here is a brief walkthrough of creating a simple website using Noir
 framework.
+
+#### We are going to cover following points in this tutorial :
+
+ * Tutorial 1 for :-
+   * Create simple website using Noir.
+   * Create Pages.
+   * Create Pages for User Interface.
+   * Database Connection.
 
 Now we will create a simple finance manager blog.
 
@@ -38,6 +46,16 @@ Created website has following structure :-
           project.clj
           README.md
 ```
+
+The `project.clj` file is used for building the application and
+managing dependencies by Leiningen.
+
+Under the `src` folder, we have the folder  `finance_manager` which contains `server.clj`. This file contains the entry point to our application. It loads up all the views and provides a main function which can be used to start the application.
+
+The `models` folder is used to keep the data such as code for the database access and table management. The `views` folder contains the namespaces describing the pages of our application and their supporting code. The template contains `common.clj` which provides a basic layout and any code shared between the pages. The `welcome.clj` is the namespace where an example page is defined and you can create your own pages under this namespace.
+
+The `resource/public` folder contains the stylesheets and javasript.
+
 Execute the following command :-
 ```
        $ lein run   
@@ -284,57 +302,10 @@ Now add links on homepage to add the budget and to view the budget.
 )
 ```
 
-Apply Validations on form.
+#### You can also check for following :
 
-Open `src/finance_manager/views/welcome.clj` file write following code
-in it.
-```clojure
-(:require [noir.validation :as vali])
+* Tutorial 2 for :
+   Form Validation.
 
-(defn valid-budget? [{:keys [budget_date budget_amt]}]
-  (vali/rule (vali/has-value? budget_date)
-             [:budget_date "Budget Date Is Required."])
-  (vali/rule (vali/has-value? budget_amt)
-             [:budget_amt "Budget Amount Is Required."]) 
-  (not (vali/errors? :budget_date :budget_amt)))
-```
-
-We will need a helper for displaying the error on the page:
-```clojure
-(defpartial error-item [[first-error]]
-  [:p.error first-error]
-)
-```
-
-Modify the `/addbudget` page as:
-```clojure
-(defpage "/addbudget" {:keys [error]}
-   (common/layout
-     [:h2 "Add Monthly Budget"]
-     [:div.error error]
-     (form-to [:post "/addbudget"]
-        (vali/on-error :budget_date error-item)
-
-        (label "budget_date" "Select Budget Date")
-        (text-field "budget_date")
-        [:br]
-        (vali/on-error :budget_amt error-item)
-
-        (label "budget_amt" "Budget Amount")
-        (text-field "budget_amt")
-        [:br]
-        (submit-button "Add Budget")
-        (reset-button "Cancel")
-     )
-   )
-)
-```
-#### Summary
-
-In this section we covered following topics :
-
-  * Create simple website using Noir.
-  * Create Pages.
-  * Create Pages for User Interface.
-  * Database Connection.
-  * Form Validation.
+* Tutorial 3 for :
+   Session Management.
