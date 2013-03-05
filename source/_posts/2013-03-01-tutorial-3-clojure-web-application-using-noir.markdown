@@ -49,7 +49,7 @@ function to fetch user record from users table.
 )
 
 ```
-
+<!-- more -->
 Open `src/finance_manager/views/welcome.clj` file and create pages for
 login and signup.
 ```clojure

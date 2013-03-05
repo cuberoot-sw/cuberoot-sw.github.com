@@ -62,6 +62,8 @@ Modify the `/addbudget` page as:
 )
 ```
 
+<!-- more -->
+
 Modify the `[:post "/addbudget"]` page as:
 ```clojure
 (defpage [:post "/addbudget"] budget
