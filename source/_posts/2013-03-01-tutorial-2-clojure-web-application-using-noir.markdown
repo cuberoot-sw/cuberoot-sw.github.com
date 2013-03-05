@@ -37,7 +37,7 @@ We will need a helper for displaying the error on the page:
   [:p.error first-error]
 )
 ```
-
+ 
 Modify the `/addbudget` page as:
 ```clojure
 (defpage "/addbudget" {:keys [error]}
