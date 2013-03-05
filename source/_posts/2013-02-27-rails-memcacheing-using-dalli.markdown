@@ -26,6 +26,7 @@ You can check memcached is running on your machine or not by command -
     1455 ??         0:00.90 /usr/local/bin/memcached -d -p 11211
     7629 ttys009    0:00.00 grep memcached
 ```
+<!-- more -->
 
 If memcached not running then start it on port 11211.
 ```
@@ -37,7 +38,7 @@ To Verify installations run :
   $ gem install dalli
 ```
 
-Test it with a sample of code on rails console :
+Then test it with a sample of code on rails console :
 ```ruby
          require 'dalli'
           dc = Dalli::Client.new('localhost:11211')

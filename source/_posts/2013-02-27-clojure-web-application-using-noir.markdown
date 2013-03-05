@@ -46,6 +46,8 @@ Created website has following structure :-
           README.md
 ```
 
+<!-- more -->
+
 The `project.clj` file is used for building the application and
 managing dependencies by Leiningen.
 

@@ -40,6 +40,8 @@ From this step on, follow the steps to setup a ubuntu machine for “ruby, rails
 </pre>
 It creates default package.box file in the current directory
 
+<!-- more -->
+
 ### 2. How to use package.box created out of Vagrant
   1) Go to your project directory and run
 <pre>
