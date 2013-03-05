@@ -25,7 +25,7 @@ $ lein new noir finance_manager
 Generating a lovely new Noir project named testing...
 ```
 The above command create a `finance_manager website` in a specified directory.
-
+ 
 Created website has following structure :-
 ```
        /finance_manager

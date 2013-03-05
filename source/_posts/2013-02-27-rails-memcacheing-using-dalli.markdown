@@ -27,7 +27,7 @@ You can check memcached is running on your machine or not by command -
     7629 ttys009    0:00.00 grep memcached
 ```
 <!-- more -->
-
+ 
 If memcached not running then start it on port 11211.
 ```
   $ /usr/local/bin/memcached -d -p 11211

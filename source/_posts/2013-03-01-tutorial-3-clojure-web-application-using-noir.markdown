@@ -32,7 +32,7 @@ First create table for `users` in `src/finance-manager/models/db.clj`
 )
 
 ```
-
+ 
 Also write function to insert users record in users table. And a
 function to fetch user record from users table.
 ```clojure
