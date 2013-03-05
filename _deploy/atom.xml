@@ -4,7 +4,7 @@
   <title><![CDATA[Cube Root Blog]]></title>
   <link href="http://cuberoot-sw.github.com/atom.xml" rel="self"/>
   <link href="http://cuberoot-sw.github.com/"/>
-  <updated>2013-03-05T13:00:12+05:30</updated>
+  <updated>2013-03-05T13:43:22+05:30</updated>
   <id>http://cuberoot-sw.github.com/</id>
   <author>
     <name><![CDATA[Cube Root]]></name>
@@ -12,6 +12,90 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Retweet and Reply tweets in rails]]></title>
+    <link href="http://cuberoot-sw.github.com/blog/2013/03/01/retweet-and-reply-tweets-in-rails/"/>
+    <updated>2013-03-01T11:29:00+05:30</updated>
+    <id>http://cuberoot-sw.github.com/blog/2013/03/01/retweet-and-reply-tweets-in-rails</id>
+    <content type="html"><![CDATA[<p>I had to add feature for reply and retweet in <a href="http://rubybeats.com/">www.rubybeats.com</a> site.</p>
+
+<p>Here is how I got it done using the <code>twitter gem</code> .</p>
+
+<h2>How to Use :</h2>
+
+<p>Add <code>gem twitter</code> in your Gemfile .</p>
+
+<p>Run <code>bundle install</code> .</p>
+
+<p>Configure Twitter for a twitter authenticated user :</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="no">Twitter</span><span class="o">.</span><span class="n">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">config</span><span class="o">.</span><span class="n">consumer_key</span> <span class="o">=</span> <span class="n">auth_user_CONSUMER_KEY</span>
+</span><span class='line'>    <span class="n">config</span><span class="o">.</span><span class="n">consumer_secret</span> <span class="o">=</span> <span class="n">auth_user_CONSUMER_SECRET</span>
+</span><span class='line'>    <span class="n">config</span><span class="o">.</span><span class="n">oauth_token</span> <span class="o">=</span> <span class="n">auth_user_OAUTH_TOKEN</span>
+</span><span class='line'>    <span class="n">config</span><span class="o">.</span><span class="n">oauth_token_secret</span> <span class="o">=</span> <span class="n">auth_user_OAUTH_TOKEN_SECRET</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Retweets the specified Tweets as the authenticating user :</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="no">Twitter</span><span class="o">.</span><span class="n">retweet</span><span class="p">(</span><span class="n">tweet_id</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Here, tweet_id is an ID of an existing status to which we are retweeting.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># It will retweets the tweet having id tweet_id as authentication user.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># It will returns the original tweet with retweet details.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Reply the specified Tweet :</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">reply_text</span> <span class="o">=</span> <span class="s2">&quot;here is a replying message&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="no">Twitter</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="n">reply_text</span><span class="p">,</span> <span class="s2">&quot;in_reply_to_status_id&quot;</span> <span class="o">=&gt;</span> <span class="n">reply_status_id</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Use &quot;in_reply_to_status_id&quot; to reply  the existing status that the update is in reply to.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Here, the reply_text is  the reply message and, the reply_status_id is an ID of an existing status to which we are replying.</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># It will returns the replied new  Tweet.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>References :</h4>
+
+<p>  <a href="https://dev.twitter.com/docs/api/1.1/post/statuses/update">https://dev.twitter.com/docs/api/1.1/post/statuses/update</a></p>
+
+<p>  <a href="https://dev.twitter.com/docs/api/1.1/post/statuses/retweet/:id">https://dev.twitter.com/docs/api/1.1/post/statuses/retweet/:id</a></p>
+
+<p>  <a href="http://rdoc.info/gems/twitter">http://rdoc.info/gems/twitter</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tutorial 3 - Clojure Web Application Using Noir]]></title>
