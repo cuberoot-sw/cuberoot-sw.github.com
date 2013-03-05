@@ -7,7 +7,11 @@ author: Prachi
 categories:
 ---
 
-In this blog, we are going to retweet and reply the tweets in Rails Application using `gem twitter` .
+I had to add feature for reply and retweet in [www.rubybeats.com](http://rubybeats.com/) site.
+
+Here is how I got it done using the `twitter gem` .
+
+## How to Use :
 
 Add `gem twitter` in your Gemfile .
 
