@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tutorial 2 - Clojure Web Application Using Noir - Cube Root Blog</title>
+  <meta name="author" content="Cube Root">
+
+  
+  <meta name="description" content="In this tutorial we are going to cover how to apply form validations in
+Noir. Open src/finance_manager/views/welcome.clj file write following code
+in &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://cuberoot-sw.github.com/blog/2013/03/01/tutorial-2-clojure-web-application-using-noir/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Cube Root Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37798927-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Cube Root Blog</a></h1>
+  
+    <h2>Programming Tidbits</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:cuberoot-sw.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://cuberoot.in">Company</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Tutorial 2 - Clojure Web Application Using Noir</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-01T10:53:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In this tutorial we are going to cover how to apply form validations in
+Noir.</p>
+
+<p>Open <code>src/finance_manager/views/welcome.clj</code> file write following code
+in it.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">noir.validation</span> <span class="ss">:as</span> <span class="nv">vali</span><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">valid-budget?</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">budget_date</span> <span class="nv">budget_amt</span><span class="p">]}]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">vali/rule</span> <span class="p">(</span><span class="nf">vali/has-value?</span> <span class="nv">budget_date</span><span class="p">)</span>
+</span><span class='line'>             <span class="p">[</span><span class="ss">:budget_date</span> <span class="s">&quot;Budget Date Is Required.&quot;</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">vali/rule</span> <span class="p">(</span><span class="nf">vali/has-value?</span> <span class="nv">budget_amt</span><span class="p">)</span>
+</span><span class='line'>             <span class="p">[</span><span class="ss">:budget_amt</span> <span class="s">&quot;Budget Amount Is Required.&quot;</span><span class="p">])</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nf">vali/errors?</span> <span class="ss">:budget_date</span> <span class="ss">:budget_amt</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above function will check that all the fields confirm to the rules,
+such as budget_date and budget_amt are provided.</p>
+
+<p>The rule have following form:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="p">(</span><span class="nf">rule</span> <span class="nv">passed?</span> <span class="p">[</span><span class="nv">field</span> <span class="nv">error</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the passed? condition is not met, add the error text to the given field.</p>
+
+<p>We will need a helper for displaying the error on the page:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defpartial</span> <span class="nv">error-item</span> <span class="p">[[</span><span class="nv">first-error</span><span class="p">]]</span>
+</span><span class='line'>  <span class="p">[</span><span class="ss">:p.error</span> <span class="nv">first-error</span><span class="p">]</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Modify the <code>/addbudget</code> page as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="s">&quot;/addbudget&quot;</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">error</span><span class="p">]}</span>
+</span><span class='line'>   <span class="p">(</span><span class="nf">common/layout</span>
+</span><span class='line'>     <span class="p">[</span><span class="ss">:h2</span> <span class="s">&quot;Add Monthly Budget&quot;</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">[</span><span class="ss">:div.error</span> <span class="nv">error</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">form-to</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/addbudget&quot;</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">vali/on-error</span> <span class="ss">:budget_date</span> <span class="nv">error-item</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;budget_date&quot;</span> <span class="s">&quot;Select Budget Date&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">text-field</span> <span class="s">&quot;budget_date&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">vali/on-error</span> <span class="ss">:budget_amt</span> <span class="nv">error-item</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;budget_amt&quot;</span> <span class="s">&quot;Budget Amount&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">text-field</span> <span class="s">&quot;budget_amt&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">submit-button</span> <span class="s">&quot;Add Budget&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">reset-button</span> <span class="s">&quot;Cancel&quot;</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">)</span>
+</span><span class='line'>   <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>Modify the <code>[:post "/addbudget"]</code> page as:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/addbudget&quot;</span><span class="p">]</span> <span class="nv">budget</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">valid-budget?</span> <span class="nv">budget</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">let</span>
+</span><span class='line'>         <span class="p">(</span><span class="nf">try</span>
+</span><span class='line'>           <span class="p">(</span><span class="nf">db/add-budget</span> <span class="nv">budget</span><span class="p">)</span>
+</span><span class='line'>                 <span class="p">(</span><span class="nf">resp/redirect</span> <span class="s">&quot;/homepage&quot;</span><span class="p">)</span>
+</span><span class='line'>                 <span class="p">(</span><span class="nf">catch</span> <span class="nv">Exception</span> <span class="nv">ex</span>
+</span><span class='line'>                   <span class="p">(</span><span class="nf">render</span> <span class="s">&quot;/addbudget&quot;</span> <span class="p">(</span><span class="nb">assoc </span><span class="nv">budget</span> <span class="ss">:error</span> <span class="p">(</span><span class="nf">.getMessage</span> <span class="nv">ex</span><span class="p">)))</span>
+</span><span class='line'>                 <span class="p">)</span>
+</span><span class='line'>         <span class="p">)</span>
+</span><span class='line'>      <span class="p">)</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">render</span> <span class="s">&quot;/addbudget&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the budget is valid then it will add the record in the database. And
+if the budget is not valid then it will render to <code>"/addbudget"</code> page
+and displays respected errors on that page.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Deepali</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-01T10:53:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://cuberoot-sw.github.com/blog/2013/03/01/tutorial-2-clojure-web-application-using-noir/" data-via="" data-counturl="http://cuberoot-sw.github.com/blog/2013/03/01/tutorial-2-clojure-web-application-using-noir/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/27/clojure-web-application-using-noir/" title="Previous Post: Tutorial 1 - Clojure Web Application Using Noir">&laquo; Tutorial 1 - Clojure Web Application Using Noir</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/03/01/tutorial-3-clojure-web-application-using-noir/" title="Next Post: Tutorial 3 - Clojure Web Application Using Noir">Tutorial 3 - Clojure Web Application Using Noir &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Us</h1>
+  <p>Thanks for stopping by! We are an exclusive Ruby on Rails services company. Find our
+  ramblings about programming here.</p>
+  <p>
+  Find out more about us: <a href="http://cuberoot.in">Cube Root</a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/03/01/tutorial-3-clojure-web-application-using-noir/">Tutorial 3 - Clojure Web Application Using Noir</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/01/tutorial-2-clojure-web-application-using-noir/">Tutorial 2 - Clojure Web Application Using Noir</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/clojure-web-application-using-noir/">Tutorial 1 - Clojure Web Application Using Noir</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/rails-memcacheing-using-dalli/">Rails Memcacheing using Dalli</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/19/vagrant-help-guide/">Vagrant Help Guide</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Cube Root -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'cuberootblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://cuberoot-sw.github.com/blog/2013/03/01/tutorial-2-clojure-web-application-using-noir/';
+        var disqus_url = 'http://cuberoot-sw.github.com/blog/2013/03/01/tutorial-2-clojure-web-application-using-noir/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

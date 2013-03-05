@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tutorial - Clojure Web Application Using Noir - Cube Root Blog</title>
+  <title>Tutorial 1 - Clojure Web Application Using Noir - Cube Root Blog</title>
   <meta name="author" content="Cube Root">
 
   
-  <meta name="description" content="Here is a brief walkthrough of creating a simple website using Noir
-framework. Now we will create a simple finance manager blog. The easiest way to &hellip;">
+  <meta name="description" content="I am going to do a series of blog posts on using Noir framework to create a simple website. Here is part 1 of the tutorial. We are going to cover &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -50,6 +49,8 @@ framework. Now we will create a simple finance manager blog. The easiest way to 
   <header role="banner"><hgroup>
   <h1><a href="/">Cube Root Blog</a></h1>
   
+    <h2>Programming Tidbits</h2>
+  
 </hgroup>
 
 </header>
@@ -68,6 +69,7 @@ framework. Now we will create a simple finance manager blog. The easiest way to 
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://cuberoot.in">Company</a></li>
 </ul>
 
 </nav>
@@ -78,7 +80,7 @@ framework. Now we will create a simple finance manager blog. The easiest way to 
   
   <header>
     
-      <h1 class="entry-title">Tutorial - Clojure Web Application Using Noir</h1>
+      <h1 class="entry-title">Tutorial 1 - Clojure Web Application Using Noir</h1>
     
     
       <p class="meta">
@@ -101,8 +103,22 @@ framework. Now we will create a simple finance manager blog. The easiest way to 
   </header>
 
 
-<div class="entry-content"><p>Here is a brief walkthrough of creating a simple website using Noir
-framework.</p>
+<div class="entry-content"><p>I am going to do a series of blog posts on using Noir framework to create a simple website. Here is part 1 of the tutorial.</p>
+
+<h4>We are going to cover following points in this tutorial :</h4>
+
+<ul>
+<li>Tutorial 1 for :-
+
+<ul>
+<li>Create simple website using Noir.</li>
+<li>Create Pages.</li>
+<li>Create Pages for User Interface.</li>
+<li>Database Connection.</li>
+</ul>
+</li>
+</ul>
+
 
 <p>Now we will create a simple finance manager blog.</p>
 
@@ -152,6 +168,20 @@ framework.</p>
 </span><span class='line'>      project.clj
 </span><span class='line'>      README.md</span></code></pre></td></tr></table></div></figure>
 
+
+
+
+<!-- more -->
+
+
+<p>The <code>project.clj</code> file is used for building the application and
+managing dependencies by Leiningen.</p>
+
+<p>Under the <code>src</code> folder, we have the folder  <code>finance_manager</code> which contains <code>server.clj</code>. This file contains the entry point to our application. It loads up all the views and provides a main function which can be used to start the application.</p>
+
+<p>The <code>models</code> folder is used to keep the data such as code for the database access and table management. The <code>views</code> folder contains the namespaces describing the pages of our application and their supporting code. The template contains <code>common.clj</code> which provides a basic layout and any code shared between the pages. The <code>welcome.clj</code> is the namespace where an example page is defined and you can create your own pages under this namespace.</p>
+
+<p>The <code>resource/public</code> folder contains the stylesheets and javasript.</p>
 
 <p>Execute the following command :-</p>
 
@@ -558,96 +588,13 @@ get all records from database.</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Apply Validations on form.</p>
-
-<p>Open <code>src/finance_manager/views/welcome.clj</code> file write following code
-in it.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">noir.validation</span> <span class="ss">:as</span> <span class="nv">vali</span><span class="p">])</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">valid-budget?</span> <span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">budget_date</span> <span class="nv">budget_amt</span><span class="p">]}]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">vali/rule</span> <span class="p">(</span><span class="nf">vali/has-value?</span> <span class="nv">budget_date</span><span class="p">)</span>
-</span><span class='line'>             <span class="p">[</span><span class="ss">:budget_date</span> <span class="s">&quot;Budget Date Is Required.&quot;</span><span class="p">])</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">vali/rule</span> <span class="p">(</span><span class="nf">vali/has-value?</span> <span class="nv">budget_amt</span><span class="p">)</span>
-</span><span class='line'>             <span class="p">[</span><span class="ss">:budget_amt</span> <span class="s">&quot;Budget Amount Is Required.&quot;</span><span class="p">])</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nf">vali/errors?</span> <span class="ss">:budget_date</span> <span class="ss">:budget_amt</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We will need a helper for displaying the error on the page:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defpartial</span> <span class="nv">error-item</span> <span class="p">[[</span><span class="nv">first-error</span><span class="p">]]</span>
-</span><span class='line'>  <span class="p">[</span><span class="ss">:p.error</span> <span class="nv">first-error</span><span class="p">]</span>
-</span><span class='line'><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Modify the <code>/addbudget</code> page as:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="s">&quot;/addbudget&quot;</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">error</span><span class="p">]}</span>
-</span><span class='line'>   <span class="p">(</span><span class="nf">common/layout</span>
-</span><span class='line'>     <span class="p">[</span><span class="ss">:h2</span> <span class="s">&quot;Add Monthly Budget&quot;</span><span class="p">]</span>
-</span><span class='line'>     <span class="p">[</span><span class="ss">:div.error</span> <span class="nv">error</span><span class="p">]</span>
-</span><span class='line'>     <span class="p">(</span><span class="nf">form-to</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/addbudget&quot;</span><span class="p">]</span>
-</span><span class='line'>        <span class="p">(</span><span class="nf">vali/on-error</span> <span class="ss">:budget_date</span> <span class="nv">error-item</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;budget_date&quot;</span> <span class="s">&quot;Select Budget Date&quot;</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">(</span><span class="nf">text-field</span> <span class="s">&quot;budget_date&quot;</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
-</span><span class='line'>        <span class="p">(</span><span class="nf">vali/on-error</span> <span class="ss">:budget_amt</span> <span class="nv">error-item</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;budget_amt&quot;</span> <span class="s">&quot;Budget Amount&quot;</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">(</span><span class="nf">text-field</span> <span class="s">&quot;budget_amt&quot;</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
-</span><span class='line'>        <span class="p">(</span><span class="nf">submit-button</span> <span class="s">&quot;Add Budget&quot;</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">(</span><span class="nf">reset-button</span> <span class="s">&quot;Cancel&quot;</span><span class="p">)</span>
-</span><span class='line'>     <span class="p">)</span>
-</span><span class='line'>   <span class="p">)</span>
-</span><span class='line'><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Summary</h4>
-
-<p>In this section we covered following topics :</p>
+<h4>You can also check for following :</h4>
 
 <ul>
-<li>Create simple website using Noir.</li>
-<li>Create Pages.</li>
-<li>Create Pages for User Interface.</li>
-<li>Database Connection.</li>
-<li>Form Validation.</li>
+<li><p>Tutorial 2 for :
+ Form Validation.</p></li>
+<li><p>Tutorial 3 for :
+ Session Management.</p></li>
 </ul>
 
 </div>
@@ -692,6 +639,8 @@ in it.</p>
         <a class="basic-alignment left" href="/blog/2013/02/27/rails-memcacheing-using-dalli/" title="Previous Post: Rails Memcacheing using Dalli">&laquo; Rails Memcacheing using Dalli</a>
       
       
+        <a class="basic-alignment right" href="/blog/2013/03/01/tutorial-2-clojure-web-application-using-noir/" title="Next Post: Tutorial 2 - Clojure Web Application Using Noir">Tutorial 2 - Clojure Web Application Using Noir &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -701,11 +650,27 @@ in it.</p>
 <aside class="sidebar">
   
     <section>
+  <h1>About Us</h1>
+  <p>Thanks for stopping by! We are an exclusive Ruby on Rails services company. Find our
+  ramblings about programming here.</p>
+  <p>
+  Find out more about us: <a href="http://cuberoot.in">Cube Root</a>
+  </p>
+</section>
+<section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/02/27/clojure-web-application-using-noir/">Tutorial - Clojure Web Application Using Noir</a>
+        <a href="/blog/2013/03/01/tutorial-3-clojure-web-application-using-noir/">Tutorial 3 - Clojure Web Application Using Noir</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/01/tutorial-2-clojure-web-application-using-noir/">Tutorial 2 - Clojure Web Application Using Noir</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/clojure-web-application-using-noir/">Tutorial 1 - Clojure Web Application Using Noir</a>
       </li>
     
       <li class="post">
@@ -714,10 +679,6 @@ in it.</p>
     
       <li class="post">
         <a href="/blog/2013/02/19/vagrant-help-guide/">Vagrant Help Guide</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/02/15/hello-world/">Hello World!</a>
       </li>
     
   </ul>
@@ -741,6 +702,19 @@ in it.</p>
 
 </footer>
   
+
+<script type="text/javascript">
+      var disqus_shortname = 'cuberootblog';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 

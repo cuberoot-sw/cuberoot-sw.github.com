@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tutorial 3 - Clojure Web Application Using Noir - Cube Root Blog</title>
+  <meta name="author" content="Cube Root">
+
+  
+  <meta name="description" content="In this tutorial we are going to cover how to manage a Session in
+Noir. We need to provide the facility to users to login with their accounts. So we &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://cuberoot-sw.github.com/blog/2013/03/01/tutorial-3-clojure-web-application-using-noir/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Cube Root Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37798927-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Cube Root Blog</a></h1>
+  
+    <h2>Programming Tidbits</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:cuberoot-sw.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://cuberoot.in">Company</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Tutorial 3 - Clojure Web Application Using Noir</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-01T11:25:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In this tutorial we are going to cover how to manage a Session in
+Noir.</p>
+
+<p>We need to provide the facility to users to login with their accounts.</p>
+
+<p>So we have to first create pages for login and signup in our
+<code>src/finance_manager/views/welcome.clj</code> file. Also we have to create a
+table for users in our <code>finance_manager_db</code> database to store users
+record.</p>
+
+<p>First create table for <code>users</code> in <code>src/finance-manager/models/db.clj</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">create-user-table</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">sql/with-connection</span>
+</span><span class='line'>      <span class="nv">db</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">sql/create-table</span>
+</span><span class='line'>        <span class="ss">:users</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:id</span> <span class="s">&quot;SERIAL&quot;</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:username</span> <span class="s">&quot;varchar(100)&quot;</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">[</span><span class="ss">:password</span> <span class="s">&quot;varchar(100)&quot;</span><span class="p">]</span>
+</span><span class='line'>       <span class="p">)</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also write function to insert users record in users table. And a
+function to fetch user record from users table.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">add-user</span> <span class="p">[</span><span class="nv">user</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">sql/with-connection</span>
+</span><span class='line'>    <span class="nv">db</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">sql/insert-record</span> <span class="ss">:users</span> <span class="nv">user</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">get-user</span> <span class="p">[</span><span class="nv">username</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">first</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">db-read</span> <span class="s">&quot;select * from users where username=?&quot;</span> <span class="nv">username</span><span class="p">))</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<!-- more -->
+
+
+<p>Open <code>src/finance_manager/views/welcome.clj</code> file and create pages for
+login and signup.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">noir.util.crypt</span> <span class="ss">:as</span> <span class="nv">crypt</span><span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'> <span class="c1">;;Login Page</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="s">&quot;/&quot;</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">error</span><span class="p">]}</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">common/layout</span>
+</span><span class='line'>   <span class="p">[</span><span class="ss">:div.error</span> <span class="nv">error</span><span class="p">]</span>
+</span><span class='line'>   <span class="p">[</span><span class="ss">:h2</span> <span class="s">&quot;Login Page&quot;</span><span class="p">]</span>
+</span><span class='line'>   <span class="p">(</span><span class="nf">form-to</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/login&quot;</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;username&quot;</span> <span class="s">&quot;Username&quot;</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">text-field</span> <span class="s">&quot;username&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;password&quot;</span> <span class="s">&quot;Password&quot;</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">password-field</span> <span class="s">&quot;password&quot;</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">submit-button</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">&quot;btn&quot;</span><span class="p">}</span> <span class="s">&quot;Login&quot;</span><span class="p">)</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">reset-button</span> <span class="p">{</span><span class="ss">:class</span> <span class="s">&quot;btn&quot;</span><span class="p">}</span> <span class="s">&quot;Cancel&quot;</span><span class="p">)</span>
+</span><span class='line'>   <span class="p">)</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; Login Page Handler</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/login&quot;</span><span class="p">]</span> <span class="nv">user</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">getuser</span> <span class="p">(</span><span class="nf">db/get-user</span> <span class="p">(</span><span class="ss">:username</span> <span class="nv">user</span><span class="p">))]</span>
+</span><span class='line'>          <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">and </span><span class="nv">getuser</span> <span class="p">(</span><span class="nf">crypt/compare</span> <span class="p">(</span><span class="ss">:password</span> <span class="nv">user</span><span class="p">)</span> <span class="p">(</span><span class="ss">:password</span> <span class="nv">getuser</span><span class="p">)))</span>
+</span><span class='line'>              <span class="p">(</span><span class="nf">render</span> <span class="s">&quot;/homepage&quot;</span> <span class="p">(</span><span class="nf">session/get</span> <span class="ss">:user</span><span class="p">))</span>
+</span><span class='line'>              <span class="p">(</span><span class="nf">render</span> <span class="s">&quot;/&quot;</span> <span class="p">(</span><span class="nb">assoc </span><span class="nv">user</span> <span class="ss">:error</span> <span class="s">&quot;Login Failed&quot;</span><span class="p">))</span>
+</span><span class='line'>          <span class="p">)</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;;Signup Page</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="s">&quot;/signup&quot;</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">error</span><span class="p">]}</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">common/layout</span>
+</span><span class='line'>    <span class="p">[</span><span class="ss">:h3</span> <span class="s">&quot;Signup Form&quot;</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">[</span><span class="ss">:div.error</span> <span class="nv">error</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">form-to</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/signup&quot;</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;username&quot;</span> <span class="s">&quot;Username&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">text-field</span> <span class="s">&quot;username&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">label</span> <span class="s">&quot;password&quot;</span> <span class="s">&quot;Password&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">password-field</span> <span class="s">&quot;password&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">[</span><span class="ss">:br</span><span class="p">]</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">submit-button</span> <span class="s">&quot;Signup&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">reset-button</span> <span class="s">&quot;Cancel&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; Signup Page Handler</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/signup&quot;</span><span class="p">]</span> <span class="nv">user</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">try</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">db/add-user</span> <span class="p">(</span><span class="nf">update-in</span> <span class="nv">user</span><span class="p">[</span><span class="ss">:password</span><span class="p">]</span> <span class="nv">crypt/encrypt</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">render</span> <span class="s">&quot;/homepage&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">catch</span> <span class="nv">Exception</span> <span class="nv">ex</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">render</span> <span class="s">&quot;/signup&quot;</span> <span class="p">(</span><span class="nb">assoc </span><span class="nv">user</span> <span class="ss">:error</span> <span class="p">(</span><span class="nf">.getMessage</span> <span class="nv">ex</span><span class="p">)))</span>
+</span><span class='line'>      <span class="p">)</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>crypt/encrypt</code> is used to encrypt the given password.</p>
+
+<p><code>crypt/compare</code> is used to compare the raw string with already encrypted
+string.</p>
+
+<p>For managing the session open <code>src/finance_manager/views/welcome.clj</code>
+file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">noir.session</span> <span class="ss">:as</span> <span class="nv">session</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then modify our <code>[:post "/login"]</code> and <code>[:post "/signup"]</code> pages.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/login&quot;</span><span class="p">]</span> <span class="nv">user</span>
+</span><span class='line'>     <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">getuser</span> <span class="p">(</span><span class="nf">db/get-user</span> <span class="p">(</span><span class="ss">:username</span> <span class="nv">user</span><span class="p">))]</span>
+</span><span class='line'>              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">and </span><span class="nv">getuser</span> <span class="p">(</span><span class="nf">crypt/compare</span> <span class="p">(</span><span class="ss">:password</span> <span class="nv">user</span><span class="p">)</span> <span class="p">(</span><span class="ss">:password</span> <span class="nv">getuser</span><span class="p">)))</span>
+</span><span class='line'>                <span class="p">(</span><span class="nf">do</span>
+</span><span class='line'>                   <span class="p">(</span><span class="nf">session/put!</span> <span class="ss">:user</span> <span class="p">(</span><span class="ss">:username</span> <span class="nv">user</span><span class="p">))</span>
+</span><span class='line'>                   <span class="p">(</span><span class="nf">render</span> <span class="s">&quot;/homepage&quot;</span> <span class="p">(</span><span class="nf">session/get</span> <span class="ss">:user</span><span class="p">))</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>                 <span class="p">(</span><span class="nf">render</span> <span class="s">&quot;/&quot;</span> <span class="p">(</span><span class="nb">assoc </span><span class="nv">user</span> <span class="ss">:error</span> <span class="s">&quot;Login Failed&quot;</span><span class="p">))</span>
+</span><span class='line'>              <span class="p">)</span>
+</span><span class='line'>       <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defpage</span> <span class="p">[</span><span class="ss">:post</span> <span class="s">&quot;/signup&quot;</span><span class="p">]</span> <span class="nv">user</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">try</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">db/add-user</span> <span class="p">(</span><span class="nf">update-in</span> <span class="nv">user</span><span class="p">[</span><span class="ss">:password</span><span class="p">]</span> <span class="nv">crypt/encrypt</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">session/put!</span> <span class="ss">:user</span> <span class="p">(</span><span class="ss">:username</span> <span class="nv">user</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">render</span> <span class="s">&quot;/homepage&quot;</span> <span class="p">(</span><span class="nf">session/get!</span> <span class="ss">:user</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">catch</span> <span class="nv">Exception</span> <span class="nv">ex</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">render</span> <span class="s">&quot;/signup&quot;</span> <span class="p">(</span><span class="nb">assoc </span><span class="nv">user</span> <span class="ss">:error</span> <span class="p">(</span><span class="nf">.getMessage</span> <span class="nv">ex</span><span class="p">)))</span>
+</span><span class='line'>      <span class="p">)</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>session/put!</code> Associates the key with the given value in the session.</p>
+
+<p><code>session/get</code> Get the key&#8217;s value from the session, returns nil if it doesn&#8217;t exist.</p>
+
+<p>Now create a page for logout to clear the session in
+<code>src/finance_manager/views/welcome.clj</code> file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'> <span class="p">(</span><span class="nf">defpage</span> <span class="s">&quot;/logout&quot;</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">session/clear!</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">resp/redirect</span> <span class="s">&quot;/&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>session/clear!</code> Remove all data from the session.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Deepali</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-01T11:25:00+05:30" pubdate data-updated="true">Mar 1<span>st</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://cuberoot-sw.github.com/blog/2013/03/01/tutorial-3-clojure-web-application-using-noir/" data-via="" data-counturl="http://cuberoot-sw.github.com/blog/2013/03/01/tutorial-3-clojure-web-application-using-noir/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/03/01/tutorial-2-clojure-web-application-using-noir/" title="Previous Post: Tutorial 2 - Clojure Web Application Using Noir">&laquo; Tutorial 2 - Clojure Web Application Using Noir</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Us</h1>
+  <p>Thanks for stopping by! We are an exclusive Ruby on Rails services company. Find our
+  ramblings about programming here.</p>
+  <p>
+  Find out more about us: <a href="http://cuberoot.in">Cube Root</a>
+  </p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/03/01/tutorial-3-clojure-web-application-using-noir/">Tutorial 3 - Clojure Web Application Using Noir</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/01/tutorial-2-clojure-web-application-using-noir/">Tutorial 2 - Clojure Web Application Using Noir</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/clojure-web-application-using-noir/">Tutorial 1 - Clojure Web Application Using Noir</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/rails-memcacheing-using-dalli/">Rails Memcacheing using Dalli</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/19/vagrant-help-guide/">Vagrant Help Guide</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Cube Root -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'cuberootblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://cuberoot-sw.github.com/blog/2013/03/01/tutorial-3-clojure-web-application-using-noir/';
+        var disqus_url = 'http://cuberoot-sw.github.com/blog/2013/03/01/tutorial-3-clojure-web-application-using-noir/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
