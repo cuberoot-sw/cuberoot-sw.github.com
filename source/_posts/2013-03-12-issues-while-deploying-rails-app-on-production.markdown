@@ -1,56 +1,55 @@
 ---
 layout: post
-title: "Issues while deploying rails app on production"
+title: "'create_yetting_class: undefined method 'each' for nil:NilClass"
 date: 2013-03-12 16:59
 comments: true
 author: Prachi
 categories:
 ---
 
-#### In this blog we are going through some issues which I faced and their fixes while deploying rails app on production.
+#### In this blog we are going through some issues which I faced while upgrading `gem twitter` and their fixes while deploying rails app on production.
 
-* Running a ruby script using `Yettings` in Rails `production environment` .
+* Running a ruby script xxtweetstream.rb using `Yettings` in Rails `production environment` .
 
-  while running a ruby script using Yettings in production with command :
+  while running a xxtweetstream.rb using Yettings in production with command :
 
 ```ruby
-$ bundle exec ruby my_ruby_script.rb
+$ bundle exec ruby xxtweetstream.rb
 ```
 
   But following error occured :
 ```ruby
-.....
-in 'create_yetting_class: undefined method 'each' for nil:NilClass (NoMethodError)'
-.....
+/var/www/iplbeats/shared/bundle/ruby/1.9.1/gems/yettings-0.1.1/lib/yettings.rb:27:in `create_yetting_class': undefined method `each' for nil:NilClass (NoMethodError)
+	from /var/www/iplbeats/shared/bundle/ruby/1.9.1/gems/yettings-0.1.1/lib/yettings.rb:11:in `block in setup!'
+	from /var/www/iplbeats/shared/bundle/ruby/1.9.1/gems/yettings-0.1.1/lib/yettings.rb:10:in `each'
+	from /var/www/iplbeats/shared/bundle/ruby/1.9.1/gems/yettings-0.1.1/lib/yettings.rb:10:in `setup!'
+	from /var/www/iplbeats/shared/bundle/ruby/1.9.1/gems/yettings-0.1.1/lib/yettings/railtie.rb:7:in `block in <class:Railtie>'
+	from /var/www/iplbeats/shared/bundle/ruby/1.9.1/gems/railties-3.2.11/lib/rails/initializable.rb:30:in `instance_exec'
 ```
 
-  Run my_ruby_script in production enviornment with specifying `RAILS_ENV=production` .
+  Run xxtweetstream.rb in production enviornment with specifying `RAILS_ENV=production` .
 
 ```ruby
-$ RAILS_ENV=production bundle exec ruby my_ruby_script.rb
+$ RAILS_ENV=production bundle exec ruby xxtweetstream.rb
 ```
+
+<!-- more -->
 
 * While running script with Yettings, an error occurs for `config/enviornment` .
 
 ```ruby
-  ...
-  cannot find 'config/enviornment'
-  ...
+  xxtweetstream.rb:11:in `require': cannot load such file -- /Users/prachi/work/cuberoot/rubybeats/aggregator/config/environment.rb (LoadError)
+  from xxtweetstream.rb:11:in `<main>'
 ```
 
-  To fix this error, added following code with using `File.join` in `my_ruby_script.rb` file .
+
+  To fix this error, added following code with using `File.join` in `xxtweetstream.rb` file .
 
 ```ruby
   root = File.expand_path(File.dirname(__FILE__))
 
-  require File.join(root + '/..', "config", "environment.rb")
-
-  ## added following code to require following files with correct path
-
-  require File.join(root, "helper.rb")
-  require File.join(root, "monkey_patches.rb")
-
-  $mylogger = Logger.new(File.join(root + '/..', "log", "xxtweetstream.rb.log"))
+  # added following code to require following files with correct path
+  require File.join(root + '/..', "config", "environment")
 ```
 
 * Running daemon on rails production env by using `gem daemons-rails` .
@@ -59,21 +58,21 @@ $ RAILS_ENV=production bundle exec ruby my_ruby_script.rb
 
   When I started a daemon  by running :
 ```ruby
-$ bundle exec ruby lib/daemons/my-daemon-script_ctl start
+$ bundle exec ruby lib/daemons/xxtweetstream_ctl start
 ```
 
   Got an error like :
 ```ruby
 ...
-releases/log/daemon-script.pid file not found.
+releases/log/xxtweetstream.rb.pid file not found.
 ...
 ```
-  So, to load the correct log file set  `dir` option in `config/daemons.yml` to my_log_dir_path.
+  So, to load the correct log file set  `dir` option in `config/daemons.yml` to correct log path.
 
 ```ruby
   dir_mode: script
   # set a correct log directory path here
-  dir: ../../my/log/dir_path
+  dir: ../../../current/log
   multiple: false
   backtrace: true
   monitor: true
