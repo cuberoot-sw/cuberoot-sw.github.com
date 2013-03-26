@@ -1,18 +1,14 @@
 ---
 layout: post
-title: "'fsck' on Vagrant"
+title: "Fixing corrupt vagrant"
 date: 2013-03-12 12:19
 comments: true
 author: Meghali Dhoble
 categories: 
 ---
 
-## Summary:
-This blog post mentions the steps to do 'fsck' on vagrant machine, in case it crashes"
+Recently my vagrant machine crashed. This is how I used 'fsck' to recover it.
 
-If your vagrant gets corrupted due to some reason; 'fsck' would help you to recover it back.
-
-## Steps:
 1. Power off the vagrant machine using
   `vagrant halt`
 2. Before booting it again enable 'gui' mode with un-commenting the below line from "Vagrantfile"
@@ -24,11 +20,5 @@ If your vagrant gets corrupted due to some reason; 'fsck' would help you to reco
 6. Create a file named 'forcefsck' at root-dir
     `sudo touch /forcefsck`
 7. Reboot the system
-<pre>
-    a. vagrant halt
-    b. vagrant up
-    OR 
-    sudo reboot [ from inside of vagrant-terminal]
-</pre>
 
 Now the vagrant should be up and running without any problem.
