@@ -7,9 +7,7 @@ author: Prachi
 categories:
 ---
 
-#### In this blog we are going through make aur simple rails blog application multilingual that is to support it with multiple language.
-
-In rails application, i want to make it multilingual. But we need to define YAML language files for all required languages and tell the Rails application which language it should currently use.
+In rails application, I want to make it multilingual. We need to define YAML language files for all required languages and tell the Rails application which language it should currently use.
 
 Rails `I18n.locale` saves the current language and can be read by the application.
 
@@ -29,6 +27,9 @@ In `/config/locales/de.yml`
   hi:
     hello: "hallo Welt"
 ```
+
+<!-- More -->
+
 #### 2. Configuration changes
 In rails application the default locale is :en for English.
 Add in `config/application.rb`
