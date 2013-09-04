@@ -7,8 +7,6 @@ author: Prachi
 categories: 
 ---
 
-#### In this blog we are going to convert currency symbol in spree rails application.
-
 I am using spree 1.3.3 in my rails application with INR currency and want to convert its symbol to '&#8377;'
 
 In spree, `money` gem is used for money and currency conversion which takes old symbol 'Rs' for INR currency.
