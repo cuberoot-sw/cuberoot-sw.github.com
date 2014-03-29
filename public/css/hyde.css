@@ -399,3 +399,48 @@ h4 {
 .colophon a {
   color: #7a7a7a;
 }
+
+.highlight {
+/*overflow-y: hidden;*/
+/*overflow-x: auto;*/
+}
+
+.highlight pre {
+overflow: auto;
+word-wrap: normal;
+white-space: pre;
+}
+
+/*#blog-archives article {*/
+  /*margin-left: 50px;*/
+
+/*}*/
+
+/*#blog-archives h1 {*/
+  /*font-size: 14px;*/
+/*}*/
+
+/*#blog-archives time{*/
+  /*float: right;*/
+  /*font-size: 14px;*/
+/*}*/
+
+#blog-archives {
+color: #aaa;
+list-style-type: none;
+}
+
+#blog-archives li {
+  margin-left: 1.5em;
+  padding: 10px 10px;
+  border-bottom: 1px dashed #aaa;
+}
+
+#blog-archives a.category, #blog-archives time {
+color: #aaa;
+}
+
+time {
+  padding-right: 1.1em;
+  text-transform:uppercase;
+}
