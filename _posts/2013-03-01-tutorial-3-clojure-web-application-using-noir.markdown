@@ -18,6 +18,7 @@ table for users in our `finance_manager_db` database to store users
 record.
 
 First create table for `users` in `src/finance-manager/models/db.clj`
+
 ```clojure
 (defn create-user-table []
   (sql/with-connection
@@ -35,6 +36,7 @@ First create table for `users` in `src/finance-manager/models/db.clj`
  
 Also write function to insert users record in users table. And a
 function to fetch user record from users table.
+
 ```clojure
 (defn add-user [user]
   (sql/with-connection
@@ -52,6 +54,7 @@ function to fetch user record from users table.
 <!-- more -->
 Open `src/finance_manager/views/welcome.clj` file and create pages for
 login and signup.
+
 ```clojure
 (:require [noir.util.crypt :as crypt])
 
@@ -117,6 +120,7 @@ login and signup.
     )
 )
 ```
+
 `crypt/encrypt` is used to encrypt the given password.
 
 `crypt/compare` is used to compare the raw string with already encrypted
@@ -124,11 +128,13 @@ string.
 
 For managing the session open `src/finance_manager/views/welcome.clj`
 file.
+
 ```clojure
 (:require [noir.session :as session])
 ```
 
 Then modify our `[:post "/login"]` and `[:post "/signup"]` pages.
+
 ```clojure
 (defpage [:post "/login"] user
      (let [getuser (db/get-user (:username user))]
@@ -160,6 +166,7 @@ Then modify our `[:post "/login"]` and `[:post "/signup"]` pages.
 
 Now create a page for logout to clear the session in
 `src/finance_manager/views/welcome.clj` file.
+
 ```clojure
  (defpage "/logout" []
   (session/clear!)

@@ -16,6 +16,7 @@ Running a ruby script tweetstream.rb using `Yettings` in Rails `production envir
 
 While running script with Yettings, an error occurs for `config/enviornment` .
 
+
 ```ruby
   tweetstream.rb:11:in `require': cannot load such file -- /Users/prachi/work/cuberoot/rubybeats/aggregator/config/environment.rb (LoadError)
   from tweetstream.rb:11:in `<main>'
@@ -38,11 +39,13 @@ Running daemon on rails production env by using `gem daemons-rails` .
   The file `config/daemons.yml` is added by installing `gem daemons-rails` .
 
   When I started a daemon  by running :
+
 ```ruby
 $ bundle exec ruby lib/daemons/tweetstream_ctl start
 ```
 
   Got an error like :
+
 ```ruby
 ...
 releases/log/tweetstream.rb.pid file not found.

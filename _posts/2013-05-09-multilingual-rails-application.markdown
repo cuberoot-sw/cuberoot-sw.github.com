@@ -17,12 +17,14 @@ Lets we use German and English language here for translation .
 #### 1. Add language.yml in config/locales
 
 In `/config/locales/en.yml`
+
 ```ruby
   en:
     hello: "Hello World"
 ```
 
 In `/config/locales/de.yml`
+
 ```ruby
   hi:
     hello: "hallo Welt"
@@ -33,6 +35,7 @@ In `/config/locales/de.yml`
 #### 2. Configuration changes
 In rails application the default locale is :en for English.
 Add in `config/application.rb`
+
 ```ruby
   config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 ```
@@ -51,6 +54,7 @@ Setting a selected locale as current language is easy. You can set the locale in
 
 #### 4.  Adding Translations
 Then we insert the links for the navigation in the `app/views/layouts/application.html.erb`:
+
 ```ruby
   <p>
     <%= link_to_unless I18n.locale == :en, "English", locale: :en %>
@@ -64,6 +68,7 @@ The I18n API's  `translate` method is used to translate the text into current la
 So, change the view to  display translated text. Use I18n API's `#t` helper to translated string as
 
 e.g in posts#index
+
 ```ruby
 <h1><%=t :hello %></h1>
 ```
@@ -74,6 +79,7 @@ You can test translation by switching languages.
 #### 5. Organization of Locale Files
 
 Putting translations for all parts of an application in one file per locale could be hard to manage.so we  can store these files in a hierarchy as follows.
+
 ```ruby
 |-defaults
 |---de.rb

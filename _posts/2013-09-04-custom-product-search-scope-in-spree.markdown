@@ -14,12 +14,6 @@ spree.
 
   Override the `lib/spree/core/search/base.rb` file.
   In this file override the protected method `get_base_scope`. Apply whatever condition you want to apply on `base_scope` in this method.
-  
-{% highlight ruby linenos %}
-def foo
-  puts 'foo'
-end
-{% endhighlight %}
 
   Suppose I want to display only approved products on my store side so
 the condition will be :

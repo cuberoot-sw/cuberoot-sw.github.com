@@ -10,12 +10,15 @@ In this blog post we will see how to apply rails pagination on Ajax.
 Here, I am doing pagination using `kaminari`.
 
 1.Add following gem in your `Gemfile`.
+
 ```ruby
 gem kaminari
 ```
+
 2.bundle install
 
 3.Open your controller file in which you want to apply pagination.
+
 ```ruby
 def index
   @products = Product.page(params[:page]).per(10)
@@ -27,6 +30,7 @@ end
 ```
 
 4.In view file index.html.haml.
+
 ```ruby
 %div#products
 	  = render :partial => '/products/product', :locals => {:products => @products}
@@ -36,6 +40,7 @@ end
 ```
 
 5.Add following code in `_product.html.haml` file.
+
 ```ruby
 %table
   @products.each do |product|
@@ -44,6 +49,7 @@ end
 ```
 
 6.Create new file `_index.js.haml` and add following code in it.
+
 ```ruby
 $('#products').html('<%= escape_javascript render(:partial => '/products/product', :locals => {:products => @products}) %>');
 $('#paginator').html('<%= escape_javascript(paginate(@products, :remote => true).to_s) %>');     
