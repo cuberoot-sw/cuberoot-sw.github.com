@@ -1,0 +1,41 @@
+---
+layout: post
+title: "JSHint"
+date: 2014-02-04 12:29
+comments: true
+categories: 
+author: Prachi
+---
+
+JSHint is a tool to detect errors and potential problems in JavaScript code.
+
+Install JSHint using a Node program.
+
+```ruby
+$ npm install jshint
+
+```
+To install JSHint globally on your system, use -g flag as:
+
+```ruby
+$ npm install jshint -g
+```
+
+If you have done, you should be able to use JSHint.
+
+To detect errors in single file run following command:
+
+``` ruby
+$ jshint orders.js
+
+orders.js: line 1, col 1, Expected an assignment or function call and instead saw an expression.
+
+orders.js: line 1, col 2, Missing semicolon.
+
+2 errors
+```
+
+Now, you should be able to fix these errors, and make your code clean.
+
+References:
+[http://www.jshint.com/docs/](http://www.jshint.com/docs/)
