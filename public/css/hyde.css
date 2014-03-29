@@ -395,3 +395,7 @@ h4 {
   line-height: 1.25;
   font-size: 1.1em;
 }
+
+.colophon a {
+  color: #7a7a7a;
+}
