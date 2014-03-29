@@ -46,7 +46,7 @@ client = Bitly.client
 
 You can then use that client to shorten or expand urls :
 
-```
+```ruby
  url = client.shorten('http://cuberoot.in/')
   
  url.long_url
