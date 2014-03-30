@@ -13,3 +13,15 @@ disqus_short_name : cuberootblog
 # Set 'provider' to false to turn analytics off globally.
 
 google_analytics_tracking_id : 'UA-37798927-2'
+
+sitemap:
+    file: "/sitemap.xml"
+    exclude:
+        - "/atom.xml"
+        - "/feed.xml"
+        - "/feed/index.xml"
+    include_posts:
+        - "/index.html"
+    change_frequency_name: "change_frequency"
+    priority_name: "priority"
+
