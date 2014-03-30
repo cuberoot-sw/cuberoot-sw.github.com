@@ -381,6 +381,9 @@ a:hover {
 
 }
 
+.post-date {
+  text-transform:uppercase;
+}
 .post-date a {
   color: #9a9a9a;
   font-weight: normal;
@@ -442,5 +445,4 @@ color: #aaa;
 
 time {
   padding-right: 1.1em;
-  text-transform:uppercase;
 }
