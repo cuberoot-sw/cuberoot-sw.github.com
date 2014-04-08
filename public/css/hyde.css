@@ -451,3 +451,25 @@ time {
   margin-top: 40px;
   /*text-align: right;*/
 }
+
+.recent_posts {
+  list-style-type: none;
+  padding-left: 0;
+}
+.recent_posts li {
+  padding: 10px 10px;
+}
+
+.side {
+}
+
+.clearfix {
+  overflow: hidden;
+}
+
+.older_posts {
+}
+
+td {
+  vertical-align: top;
+}

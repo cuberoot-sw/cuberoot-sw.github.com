@@ -4,7 +4,7 @@ url:          http://blog.cuberoot.in
 markdown:     redcarpet
 permalink:    /:title
 pygments:     true
-paginate:     5
+paginate:     10
 excerpt_separator: "<!-- more -->"
 
 disqus_short_name : cuberootblog
