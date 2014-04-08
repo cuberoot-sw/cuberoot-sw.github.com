@@ -20,7 +20,7 @@ In this blog we are going to create shorten URL's in rails application using Bit
 
   - Ruby has a `gem bitly` for bit.ly API. 
 
-<!-- More -->
+<!-- more -->
 
 ```ruby
 gem install bitly

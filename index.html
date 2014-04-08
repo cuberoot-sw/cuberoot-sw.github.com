@@ -13,8 +13,14 @@ layout: default
     </h1>
 
     {% include post_tagline.html post=post %}
-
-    {{ post.content }}
+    <div>
+    {{ post.excerpt }}
+    {% if post.excerpt != post.content %}
+    <div class="more">
+      <a href="{{ post.url }}">READ THE FULL POST</a>
+    </div>
+    {% endif %}
+    </div>
   </div>
   {% endunless %}
   {% endfor %}

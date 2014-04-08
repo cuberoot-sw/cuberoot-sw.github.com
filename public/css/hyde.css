@@ -446,3 +446,8 @@ color: #aaa;
 time {
   padding-right: 1.1em;
 }
+
+.more {
+  margin-top: 40px;
+  /*text-align: right;*/
+}

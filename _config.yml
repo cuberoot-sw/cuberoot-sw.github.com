@@ -5,6 +5,7 @@ markdown:     redcarpet
 permalink:    /:title
 pygments:     true
 paginate:     5
+excerpt_separator: "<!-- more -->"
 
 disqus_short_name : cuberootblog
   
