@@ -439,7 +439,7 @@ list-style-type: none;
   border-bottom: 1px dashed #aaa;
 }
 
-#blog-archives a.category, #blog-archives time {
+#blog-archives a.category, time {
 color: #aaa;
 }
 
@@ -507,4 +507,12 @@ li.gem  a{
 
 table.footer {
   width: 100%;
+}
+
+.recent_posts a {
+  font-weight: 500;
+}
+
+.recent_posts li {
+  border-bottom: 1px dashed #aaa;
 }
