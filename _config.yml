@@ -26,3 +26,24 @@ sitemap:
     change_frequency_name: "change_frequency"
     priority_name: "priority"
 
+github:
+  -
+    name: youtube_it
+    url : https://github.com/girishso/youtube_it
+  - name: kipwiki
+    url : https://github.com/girishso/kipwiki
+  - name: mindflowy
+    url : https://github.com/cuberoot-sw/mindflowy
+  - name: jiralicious
+    url : https://github.com/girishso/jiralicious
+
+rubygems:
+  -
+    name: spree-custom-notifications
+    url : http://rubygems.org/gems/spree_custom_notifications
+  -
+    name: goog_currency
+    url : http://rubygems.org/gems/goog_currency
+  -
+    name: rails-client-logger
+    url : http://rubygems.org/gems/rails-client-logger

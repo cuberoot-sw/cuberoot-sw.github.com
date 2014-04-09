@@ -452,11 +452,11 @@ time {
   /*text-align: right;*/
 }
 
-.recent_posts {
+ul {
   list-style-type: none;
-  padding-left: 0;
+  padding: 0;
 }
-.recent_posts li {
+li {
   padding: 10px 10px;
 }
 
@@ -467,9 +467,44 @@ time {
   overflow: hidden;
 }
 
-.older_posts {
+.gh_wrapper {
+  padding-left: 40px;
 }
 
-td {
+td, th {
   vertical-align: top;
+  padding: 0;
+  text-align: left;
+}
+
+th {
+  border-bottom: 1px solid #aaa;
+}
+.gh_icon {
+  float: left;
+  width: 25px;
+  margin-right: 10px;
+}
+
+li.prj {
+  background-image: url(../images/github-icon.png);
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  background-position: 0 50%;
+}
+li.prj  a{
+    font-weight:normal;
+  }
+li.gem {
+  background-image: url(../images/ruby.png);
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  background-position: 0 50%;
+}
+li.gem  a{
+    font-weight:normal;
+  }
+
+table.footer {
+  width: 100%;
 }

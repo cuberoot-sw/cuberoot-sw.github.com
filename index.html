@@ -26,26 +26,44 @@ layout: default
   {% endfor %}
 </div>
 
-<table>
+<table class="footer">
   <tr>
-    <td>
+    <th><h1>Older Posts</h1></th>
+    <th class="gh_wrapper"><h1>Github</h1></th>
+  </tr>
+  <tr>
+    <td width="70%">
       <div class="side">
-        <h1>Github</h1>
         <ul class="recent_posts">
-          {% for post in paginator.posts %}
+          {% for post in paginator.posts offset:1 %}
           <li><a href="{{ post.url }}">{{ post.title }}</a></li>
           {% endfor %}
         </ul>
       </div>
     </td>
-    <td>
-      <div class="older_posts clearfix">
-        <h1>Older Posts</h1>
-        <ul class="recent_posts">
-          {% for post in paginator.posts %}
-          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-          {% endfor %}
-        </ul>
+    <td class="gh_wrapper">
+      <div class="github clearfix">
+        <div>
+          <ul class="">
+            {% for prj in site.github %}
+            <li class="prj">
+              <a href="{{ prj['url'] }}">{{ prj['name'] }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div>
+          <h1>Gems</h1>
+          <ul class="">
+            {% for gem in site.rubygems %}
+            <li class="gem">
+              <a href="{{ gem['url'] }}">{{ gem['name'] }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
       </div>
     </td>
   </tr>
