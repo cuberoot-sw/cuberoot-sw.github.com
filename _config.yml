@@ -26,7 +26,7 @@ sitemap:
     change_frequency_name: "change_frequency"
     priority_name: "priority"
 
-github:
+github_projects:
   -
     name: youtube_it
     url : https://github.com/girishso/youtube_it
