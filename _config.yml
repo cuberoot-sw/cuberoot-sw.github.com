@@ -30,11 +30,14 @@ github:
   -
     name: youtube_it
     url : https://github.com/girishso/youtube_it
-  - name: kipwiki
+  -
+    name: kipwiki
     url : https://github.com/girishso/kipwiki
-  - name: mindflowy
+  -
+    name: mindflowy
     url : https://github.com/cuberoot-sw/mindflowy
-  - name: jiralicious
+  -
+    name: jiralicious
     url : https://github.com/girishso/jiralicious
 
 rubygems:
