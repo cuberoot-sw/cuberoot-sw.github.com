@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Inflections in Rails"
+title: "Rails ActiveSupport Inflections"
 date: 2014-07-04 15:43:05 +0530
 author: Prachi
 ---
