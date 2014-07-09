@@ -30,6 +30,7 @@ leafe       GET    /leaves/:id(.:format)      leaves#show
 here, the singularize format of 'leaves' is taken as 'leafe' .
 
 Suppose, we want to change the singularize format to 'leave', then -
+<!-- more -->
 
 Add rule in `config/initializers/inflections.rb`
 
