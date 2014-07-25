@@ -29,28 +29,28 @@ leafe       GET    /leaves/:id(.:format)      leaves#show
 
 here, the singularize format of 'leaves' is taken as 'leafe' .
 
-Suppose, we want to change the singularize format to 'leave', then -
+Suppose, we want to change the singularize format to 'leaf', then -
 <!-- more -->
 
 Add rule in `config/initializers/inflections.rb`
 
 ```ruby
 ActiveSupport::Inflector.inflections do |inflect|
-  inflect.irregular 'leave', 'leaves'
+  inflect.irregular 'leaf', 'leaves'
 end
 ```
 
 Now, check routes for same -
 
 ```ruby
-new_leave   GET   /leaves/new(.:format)       leaves#new
-edit_leave  GET   /leaves/:id/edit(.:format)  leaves#edit
-leave       GET   /leaves/:id(.:format)       leaves#show
+new_leaf   GET    /leaves/new(.:format)        leaves#new
+edit_leaf  GET    /leaves/:id/edit(.:format)   leaves#edit
+leaf       GET    /leaves/:id(.:format)        leaves#show
 ```
 
 ```ruby
 > 'leaves'.singularize
-=> "leave"
+=> "leaf"
 ```
 
 It Works! In this way, by adding `inflection` rules, we can override naming conventions in rails .
