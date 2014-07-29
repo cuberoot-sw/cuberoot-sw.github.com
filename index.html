@@ -1,92 +1,135 @@
 ---
 layout: default
 ---
+{% if paginator.page == 1 %}
+  <div class="posts">
+    {% for post in site.posts limit:1 %}
+    {% unless post.draft %}
+    <div class="post">
+      <h1>
+        <a href="{{ post.url }}">
+          {{ post.title }}
+        </a>
+      </h1>
 
-<div class="posts">
-  {% for post in site.posts limit:1 %}
-  {% unless post.draft %}
-  <div class="post">
-    <h1>
-      <a href="{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
-
-    {% include post_tagline.html post=post %}
-    <div>
-    {{ post.excerpt }}
-    {% if post.excerpt != post.content %}
-    <div class="more">
-      <a href="{{ post.url }}">READ THE FULL POST</a>
+      {% include post_tagline.html post=post %}
+      <div>
+      {{ post.excerpt }}
+      {% if post.excerpt != post.content %}
+      <div class="more">
+        <a href="{{ post.url }}">READ THE FULL POST</a>
+      </div>
+      {% endif %}
+      </div>
     </div>
-    {% endif %}
-    </div>
+    {% endunless %}
+    {% endfor %}
   </div>
-  {% endunless %}
-  {% endfor %}
-</div>
 
-<table class="footer">
-  <tr>
-    <th><h1>Older Posts</h1></th>
-    <th class="gh_wrapper"><h1>Github</h1></th>
-  </tr>
-  <tr>
-    <td width="70%">
-      <div class="side">
-        <ul class="recent_posts">
-          {% for post in paginator.posts offset:1 %}
-          <li><time>{{ post.date | date:"%b %d" }}</time><a href="{{ post.url }}">{{ post.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-    </td>
-    <td class="gh_wrapper">
-      <div class="github clearfix">
-        <div>
-          <ul class="">
-            {% for prj in site.github_projects %}
-            <li class="prj">
-              <a href="{{ prj['url'] }}">{{ prj['name'] }}</a>
-            </li>
+  <table class="footer">
+    <tr>
+      <th><h1>Older Posts</h1></th>
+      <th class="gh_wrapper"><h1>Github</h1></th>
+    </tr>
+    <tr>
+      <td width="70%">
+        <div class="side">
+          <ul class="recent_posts">
+            {% for post in paginator.posts offset:1 %}
+            <li><time>{{ post.date | date:"%b %d" }}</time><a href="{{ post.url }}">{{ post.title }}</a></li>
             {% endfor %}
           </ul>
         </div>
+      </td>
+      <td class="gh_wrapper">
+        <div class="github clearfix">
+          <div>
+            <ul class="">
+              {% for prj in site.github_projects %}
+              <li class="prj">
+                <a href="{{ prj['url'] }}">{{ prj['name'] }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
 
-        <div>
-          <h1>Gems</h1>
-          <ul class="">
-            {% for gem in site.rubygems %}
-            <li class="gem">
-              <a href="{{ gem['url'] }}">{{ gem['name'] }}</a>
-            </li>
+          <div>
+            <h1>Gems</h1>
+            <ul class="">
+              {% for gem in site.rubygems %}
+              <li class="gem">
+                <a href="{{ gem['url'] }}">{{ gem['name'] }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+        </div>
+      </td>
+    </tr>
+  </table>
+  {% include pagination.html %}
+
+{% else %}
+
+
+  <table class="footer2">
+    <tr>
+      <th><h1>Older Posts</h1></th>
+
+    </tr>
+    <tr>
+      <td width="70%">
+        <div class="side">
+          <ul class="recent_posts">
+            {% for post in paginator.posts offset:1 %}
+            <li><time>{{ post.date | date:"%b %d" }}</time><a href="{{ post.url }}">{{ post.title }}</a></li>
             {% endfor %}
           </ul>
         </div>
+      </td>
 
-      </div>
-    </td>
-  </tr>
-</table>
+    </tr>
+  </table>
+
+  {% include pagination.html %}
+
+  <table class="footer">
+    <tr>
+      <th class="gh_wrapper"><h1>Github</h1></th>
+      <th class="gh_wrapper"><h1>Gems</h1></th>
+    </tr>
+    <tr>
+      <td class="gh_wrapper">
+        <div class="github clearfix">
+          <div>
+            <ul class="">
+              {% for prj in site.github_projects %}
+              <li class="prj">
+                <a href="{{ prj['url'] }}">{{ prj['name'] }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+      </td>
+      <td>
+          <div>
+            <ul class="">
+              {% for gem in site.rubygems %}
+              <li class="gem">
+                <a href="{{ gem['url'] }}">{{ gem['name'] }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+        </div>
+      </td>
+    </tr>
+  </table>
+{% endif %}
 
 
-<!-- Pagination links -->
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a href="/page{{paginator.next_page}}" class="older">Older</a>
-  {% else %}
-    <span class="next">Older</span>
-  {% endif %}
-  {% if paginator.previous_page %}
-    {% if paginator.page == 2 %}
-      <a href="/" class="newer">Newer</a>
-    {% else %}
-      <a href="/page{{paginator.previous_page}}" class="newer">Newer</a>
-    {% endif %}
-  {% else %}
-    <span class="previous">Newer</span>
-  {% endif %}
-</div>
+
 
 {% include disqus_thread.html %}
-

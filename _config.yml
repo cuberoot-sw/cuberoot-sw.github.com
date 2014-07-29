@@ -8,7 +8,7 @@ paginate:     10
 excerpt_separator: "<!-- more -->"
 
 disqus_short_name : cuberootblog
-  
+
 # Settings for analytics helper
 # Set 'provider' to the analytics provider you want to use.
 # Set 'provider' to false to turn analytics off globally.
@@ -28,14 +28,14 @@ sitemap:
 
 github_projects:
   -
-    name: youtube_it
-    url : https://github.com/girishso/youtube_it
+    name: phant_rb
+    url : https://github.com/girishso/phant_rb
   -
     name: kipwiki
     url : https://github.com/girishso/kipwiki
   -
     name: mindflowy
-    url : https://github.com/cuberoot-sw/mindflowy
+    url : https://github.com/girishso/mindflowy
   -
     name: jiralicious
     url : https://github.com/girishso/jiralicious
