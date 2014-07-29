@@ -521,3 +521,12 @@ h1.osc {
   padding-bottom: 20px;
   border-bottom: 1px dashed #aaa;
 }
+
+td, th {
+    padding: 0;
+}
+
+table
+{
+    border-collapse: collapse; /* 'cellspacing' equivalent */
+}
