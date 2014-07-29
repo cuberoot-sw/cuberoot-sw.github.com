@@ -516,3 +516,8 @@ table.footer {
 .recent_posts li {
   border-bottom: 1px dashed #aaa;
 }
+
+h1.osc {
+  padding-bottom: 20px;
+  border-bottom: 1px dashed #aaa;
+}

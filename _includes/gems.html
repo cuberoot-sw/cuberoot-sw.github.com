@@ -1,0 +1,7 @@
+<ul class="">
+  {% for gem in site.rubygems %}
+  <li class="gem">
+    <a href="{{ gem['url'] }}">{{ gem['name'] }}</a>
+  </li>
+  {% endfor %}
+</ul>
