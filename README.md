@@ -12,3 +12,4 @@ end
 {% endhighlight %}
 </pre>
 
+rake new title="New post title goes here"
