@@ -23,4 +23,3 @@ I ended up modifying the `font-awesome.css` file and renaming the class names, s
 
 For more details see this FontAwesome [issue](https://github.com/FortAwesome/Font-Awesome/issues/1799)
 
-Hope this helps someone!
