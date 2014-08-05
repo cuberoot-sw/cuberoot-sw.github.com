@@ -530,3 +530,12 @@ table
 {
     border-collapse: collapse; /* 'cellspacing' equivalent */
 }
+
+.highlight:hover {
+  width:115%;
+
+}
+
+pre code {
+  font-size: .95em;
+}
