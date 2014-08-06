@@ -607,3 +607,45 @@ var PhonesList = React.createClass({
 The `render` function of `PhonesList`, filters the `phones` property using
 [jQuery.grep](http://api.jquery.com/jquery.grep/). Then sorts the filtered
 phones using javascript [sort](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) function.
+
+## 6 Ajax
+In this step we will get the data from our JSON API. There is no API for the tutorial, we will
+just fetch `/phones/phones.json` from the server.
+
+Let's get rid of the static `PHONES` array.
+
+__src/scripts/components/PhoneCatWrapper.js__
+
+```javascript
+var PhoneCatWrapper = React.createClass({
+  getInitialState: function() {
+      return {
+        phones: []
+      }
+  },
+
+  componentDidMount: function() {
+    $.getJSON('/phones/phones.json', (function(data) {
+      this.setState({phones: data});
+    }).bind(this));
+
+  },
+
+  render: function() {
+    return (
+      <PhoneCat phones={this.state.phones} />
+    )
+  }
+});
+```
+
+We are going to store the phones data returned from the API in
+`PhoneCatWrapper` state.
+`getInitialState` function returns an empty `phones` array.
+
+The `componentDidMount` function is invoked immediately after the component is rendered
+in the browser DOM.
+This is a good place to call our API using [jQuery.getJSON](http://api.jquery.com/jquery.getjson/) function.
+On success we are storing the data in state using `this.setState`.
+
+### We will implement the phone details page in next part of this post.
