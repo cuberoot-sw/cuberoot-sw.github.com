@@ -539,3 +539,12 @@ table
 pre code {
   font-size: .95em;
 }
+
+.tutorial_header li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+background-color: #aaa;
+margin-right: 20px;
+}

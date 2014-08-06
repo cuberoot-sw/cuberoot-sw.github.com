@@ -16,6 +16,7 @@ Just like the good old 90's!
 Developing apps in React requires thinking differently than other [typical](https://angularjs.org/)
 [javascript](http://backbonejs.org/) [frameworks](http://emberjs.com/).
 
+
 ### React JS Primer
 #### No Templates but Components
 Enough treating Views as a string. React uses javascript objects (called components) to represent the app markup.
@@ -75,6 +76,9 @@ PhoneCat is a catalog of Android devices, which you can filter, sort and see det
 Click [Final Demo] TODO to see what we are going build at the end of the tutorial.
 
 ## 0 Bootstrapping
+
+{% include tutorial_headers.html step="1" prev_step="0~1" %}
+
 [reactjs-phonecat](TODO) is git repo for this tutorial. Clone the repo and execute following commands in the project directory
 
 ```
@@ -138,9 +142,7 @@ __src/index.html__
 </head>
 <body>
   <div id="app" class="container">
-
   </div>
-
   <script type="text/javascript" src="assets/main.js"></script>
 </body>
 </html>
@@ -194,9 +196,7 @@ var PhoneCatWrapper = React.createClass({
               Experience the future with Motorola XOOM with Wi-Fi, the world's first tablet powered by Android 3.0 (Honeycomb).
             </p>
           </li>
-
           <!-- code deleted for brevity -->
-
         </ul>
         </div>
       </div>
@@ -478,7 +478,10 @@ Now that we have a dynamically generated app. Let's add filter and sort features
 
 This is the time to identify the app state. Go through [this](http://facebook.github.io/react/docs/thinking-in-react.html#step-3-identify-the-minimal-but-complete-representation-of-ui-state)
 article to read more about identifying the app state.
+
+
 The only actions user can perform are filter and sort. So our state is
+
 * filter text that user has entered
 * sort order that user has selected
 
@@ -497,14 +500,12 @@ var PhoneCat = React.createClass({
         sort_by: 'age'
       }
   },
-
   handleSearch: function(filter_text, sort_by) {
     this.setState({
       filter_text: filter_text,
       sort_by: sort_by
     })
   },
-
   render: function() {
     return (
       <div className="row">
@@ -541,7 +542,6 @@ var SearchForm = React.createClass({
     var order = this.refs.order.getDOMNode().value;
     this.props.searchHandler(query, order);
   },
-
   render: function() {
     return (
       <div>
@@ -576,7 +576,6 @@ __src/scripts/components/PhonesList.js__
 
 ```javascript
 var PhonesList = React.createClass({
-
   render: function() {
     var props = this.props;
 
@@ -623,14 +622,12 @@ var PhoneCatWrapper = React.createClass({
         phones: []
       }
   },
-
   componentDidMount: function() {
     $.getJSON('/phones/phones.json', (function(data) {
       this.setState({phones: data});
     }).bind(this));
 
   },
-
   render: function() {
     return (
       <PhoneCat phones={this.state.phones} />
