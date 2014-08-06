@@ -13,16 +13,16 @@ in React JS.
 React uses Virtual DOM, an in-memory representation of the browser DOM, making it possible to re-render our entire app on every data change.
 Just like the good old 90's!
 
-Developing apps in React requires thinking differently than other [typical](https://angularjs.org/)
+Developing apps in React requires different thinking than other [typical](https://angularjs.org/)
 [javascript](http://backbonejs.org/) [frameworks](http://emberjs.com/).
 
 
 ### React JS Primer
-#### No Templates but Components
-Enough treating Views as a string. React uses javascript objects (called components) to represent the app markup.
-Components facilitate separation of concerns and can be unit tested in isolation. We are not going to do any testing in this tutorial
+#### Components Not Templates
+Enough treating Views as strings. React uses javascript objects (called components) to represent the app markup.
+Components facilitate separation of concerns and can be unit tested in isolation. We are not doing any testing in this tutorial
 (very bad, I know!).
-Click [here](http://facebook.github.io/react/docs/test-utils.html) to read more about React testing.
+Click [here](http://facebook.github.io/react/docs/test-utils.html) are interested in React testing.
 
 React components are created with `React.createClass` method. Every component must implement a `render` method.
 
@@ -41,7 +41,7 @@ As you can imagine, `React.renderComponent` renders our `Hello` component in `do
 
 #### JSX
 XML like HTML markup inside javascript is called JSX.
-JSX makes it easy for non-developers (e.g. designers) to edit the components.
+JSX makes it easy for non-developers (for example designers) to edit the components.
 JSX is converted to javascript by the JSX transformer.
 `/** @jsx React.DOM */` comment, signifies a `jsx` file, so JSX transformer can act on it.
 
@@ -111,10 +111,12 @@ We have added html mockups, stylesheets and images. You can see the mockups here
 
 
 ### PhoneCat components
-Our next task is identifying the components. This is a very subjective topic and each individual can have different opinions.
-Here are the components I've decided for the Home page.
+Our next task is identifying the components. This is a very subjective topic and everybody can have different opinions.
+Here are the components I've decided to go with for the Home page.
 
 ![alt text](/public/images/phonecat/home-page.png)
+
+Here is our components hierarchy -
 
 ```
 - PhoneCatWrapper (blue)
@@ -148,23 +150,19 @@ __src/index.html__
 </html>
 ```
 
-`main.js` requires the `PhoneCatWrapper.js` and renders it in `#id`
+`main.js` is the entry point of our app. It renders the `PhoneCatWrapper` component in `#id`
 
 __src/scripts/main.js__
 
 ```html
 /** @jsx React.DOM */
-
-// Bring in jQuery and React as a Bower component in the global namespace
 require("script!react/react-with-addons.js")
 require("script!jquery/jquery.js")
-
 var PhoneCatWrapper = require("./components/PhoneCatWrapper.js")
-
 React.renderComponent(<PhoneCatWrapper />, document.getElementById('app'))
 ```
 
-We have copied contents of `div.row` from `mock_index.html` in the render function of PhoneCatWrapper.
+We have copied contents of `div.row` from `mock_index.html` in the render function of `PhoneCatWrapper`.
 
 
 __src/scripts/components/PhoneCatWrapper.js__
@@ -172,7 +170,6 @@ __src/scripts/components/PhoneCatWrapper.js__
 
 ```javascript
 /** @jsx React.DOM */
-
 var PhoneCatWrapper = React.createClass({
   render: function() {
     return (
@@ -220,7 +217,7 @@ Now it's working as expected!
 
 ## 3 Extract all static components
 To speedup the things,
-let's extract all the components from `PhoneCatWrapper`. Note that all these components
+let's extract all the remaining components from `PhoneCatWrapper`. Note that all these components
 have static html.
 
 You won't notice any difference in the UI, it's the same old html rendered in browser.
@@ -291,7 +288,7 @@ var PhonesList = React.createClass({
 module.exports = PhonesList;
 ```
 
-`Phone` - an individual phone - has the static html markup.
+`Phone` represents... well a phone!
 
 __src/scripts/components/Phone.js__
 
