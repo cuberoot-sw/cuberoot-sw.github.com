@@ -548,6 +548,20 @@ pre code {
 display: inline;
 list-style-type: none;
 padding-right: 20px;
-background-color: #aaa;
+background-color: #ddd;
 margin-right: 20px;
+border-radius: 3px;
+}
+
+.tutorial_header, .tutorial_setup {
+  margin: 20px 0;
+
+}
+.highlight {
+  max-height: 550px;
+  overflow: overlay;
+}
+
+p a {
+  text-decoration: underline;
 }

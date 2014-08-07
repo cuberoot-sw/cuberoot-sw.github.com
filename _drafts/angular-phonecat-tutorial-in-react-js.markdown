@@ -1,23 +1,47 @@
 ---
 layout: post
 title: "Angular PhoneCat Tutorial in React JS"
-date: 2014-08-05 12:36:55 +0530
+date: 2014-08-08 12:36:55 +0530
 author: Girish
 ---
 
-In this post, we are going to re-implement the Angular JS [PhoneCat tutorial](https://docs.angularjs.org/tutorial)
+In this tutorial, we are going to re-implement the Angular JS [PhoneCat tutorial](https://docs.angularjs.org/tutorial)
 in React JS.
 
-{% include tutorial_headers.html step="6" demo_text="Live Final Demo" %}
+
+{% include tutorial_headers.html step="12" demo_text="Live Final Demo" %}
+
+
+## PhoneCat Tutorial
+PhoneCat is a catalog of Android devices, which you can filter, sort and see details of the device.
+
+![alt text](/public/images/phonecat/catalog_screen.png)
+
+In this __12 step__ tutorial you will learn about:
+
+1.  React JS
+2.  Creating components
+3.  Components interaction
+4.  Routing in React
+
+After you complete all the steps in this tutorial, you’ll have an app that looks something like this:
+
+{% include tutorial_headers.html step="12" demo_text="Live Final Demo" %}
+
+
 
 ## About React JS
-[React JS](http://facebook.github.io/react/) for the uninitiated, is a javascript framework from Facebook. Most commonly used as a V in MVC.
+[React JS](http://facebook.github.io/react/) for the uninitiated, is a javascript framework from Facebook/Instagram. Most commonly used as a V in MVC.
+React is used in production by FaceBook, Instagram, Khanacademy, Atom editor and many more.
+
 React uses Virtual DOM, an in-memory representation of the browser DOM, making it possible to re-render our entire app on every data change.
 Just like the good old 90's!
 
 Developing apps in React requires different thinking than other [typical](https://angularjs.org/)
 [javascript](http://backbonejs.org/) [frameworks](http://emberjs.com/).
 
+
+<!-- more -->
 
 ### React JS Primer
 #### Components Not Templates
@@ -70,24 +94,23 @@ Hello = React.createClass({
 
 Head over to [displaying-data](http://facebook.github.io/react/docs/displaying-data.html) for a more complete primer.
 
-## PhoneCat Tutorial
-PhoneCat is a catalog of Android devices, which you can filter, sort and see details of the device.
 
-![alt text](/public/images/phonecat/catalog_screen.png)
 
-To see what we are going build at the end of the tutorial.
 
-{% include tutorial_headers.html step="6" demo_text="Live Final Demo" %}
 
-## Step 0 Bootstrapping
 
-{% include tutorial_headers.html step="0" prev_step="0~2" %}
+
+## Step-0 Bootstrapping
+
+{% include tutorial_headers.html step=0 prev_step="0~2" %}
 
 Tutorial sources are available at [reactjs-phonecat](https://github.com/girishso/reactjs-phonecat).
-We are using [node.js](http://nodejs.org/) as local server
+
+We are using [react-starter-template](https://github.com/johnthethird/react-starter-template) for the tutorial.
+[node.js](http://nodejs.org/) is used as local server
 and [gulp.js](http://gulpjs.com/) as build tool.
 
-Clone the repo and execute following commands in the project directory
+To get strated, clone the repo and execute following commands in the project directory
 
 ```
 $ git clone https://github.com/girishso/reactjs-phonecat#
@@ -104,6 +127,11 @@ $ gulp dev
 ```
 
 Goto http://127.0.0.1:4000/ in your browser. You should see a success message.
+
+
+
+
+
 
 ## Step-1 Mockups
 
@@ -138,6 +166,10 @@ Here is our components hierarchy -
     - PhonesList (orange)
       - Phone (green)
 ```
+
+
+
+
 
 
 ## Step-2 PhoneCatWrapper component
@@ -221,17 +253,21 @@ var PhoneCatWrapper = React.createClass({
 
 module.exports = PhoneCatWrapper;
 ```
-Right now if you refresh the browser, it fails saying `Line 19: Expected corresponding XJS closing tag for img`
+Right now if you refresh the browser, it fails saying `Line 19: Expected corresponding XJS closing tag for img`.
 JSX needs strict XML. Let's add the `img` closing tags.
 
 Now it's working but the layout is all messed up.
-TODO PREVIEW?
 This is because JSX expects
 HTML attributes in a slightly different manner, the culprit here is `class` it's
 not showing up in the rendered HTML. To fix this replace all `class` attributes
 with `className`.
 
 Now it's working as expected!
+
+
+
+
+
 
 ## Step-3 Extract all static components
 
@@ -365,6 +401,8 @@ module.exports = SearchForm;
 ```
 
 
+
+
 ## Setp-4 Add dynamism
 
 {% include tutorial_headers.html step="4" prev_step="3" %}
@@ -373,13 +411,13 @@ module.exports = SearchForm;
 
 Enough of static components, let's make 'em dynamic!
 
-Enter `props`. `props` (short for properties) is how components talk to each other.
+Enter `props` (short for properties), `props` is how components talk to each other.
 
 Our API is going to return JSON that looks like `PHONES` array.
 
 __src/scripts/components/PhoneCatWrapper.js__
 
-{% highlight javascript linenos %}
+```javascript
 /** @jsx React.DOM */
 var PhoneCat = require("./PhoneCat.js")
 
@@ -422,11 +460,13 @@ var PhoneCatWrapper = React.createClass({
     )
   }
 });
-{% endhighlight %}
+```
 
-On Line 39 - we are passing `PhoneCat` a property `phones`
+
+We are passing `PhoneCat` a property `phones`
 and assigning it to the `PHONES` array. In JSX you need to include javascript
 code inside the curly braces.
+
 
 __src/scripts/components/PhoneCat.js__
 
@@ -497,6 +537,12 @@ var Phone = React.createClass({
 
 In `Phone` we are using the `phone` property to assign the image, name and snippet.
 Let's worry about the links when we deal with the `PhoneDetails` component.
+
+
+
+
+
+
 
 ## Step-5 Filter and Sort
 
@@ -637,6 +683,11 @@ The `render` function of `PhonesList`, filters the `phones` property using
 [jQuery.grep](http://api.jquery.com/jquery.grep/). Then sorts the filtered
 phones using javascript [sort](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) function.
 
+
+
+
+
+
 ## Step-6 Ajax
 
 {% include tutorial_headers.html step="6" prev_step="5" %}
@@ -680,4 +731,518 @@ in the browser DOM.
 This is a good place to call our API using [jQuery.getJSON](http://api.jquery.com/jquery.getjson/) function.
 On success we are storing the data in state using `this.setState`.
 
-### We will implement the phone details page in next part of this post.
+
+
+
+## Step-7 Phone page
+
+{% include tutorial_headers.html step="7" prev_step="6" %}
+
+{% include tutorial_setup.html step="7" %}
+
+Now that we are done with the home page, it's time to add the Phone page. Here is the screenshot of our mock page.
+
+![alt text](/public/images/phonecat/phone-page.png)
+
+Here is our components hierarchy for the phone page -
+
+```
+- PhoneDetailsWrapper (blue)
+  - PhoneDetails (green)
+    - ImageGallery (red)
+```
+We will display Phone page on path `/phones/some-phone-id`.
+
+Before we get into creating Phone page components, we need to resolve one issue. How is our app
+going to load the Phone page for path `/phones/some-phone-id`?
+
+We need some routing framework for this, remember React only deals with the V of the MVC.
+There are many possibilities - we could use [backbone](http://backbonetutorials.com/what-is-a-router/) routes,
+[crossroads](http://millermedeiros.github.io/crossroads.js/) or many more.
+
+We are going with [react-router](https://github.com/rackt/react-router), it's specific to React and
+will be easier to deal with.
+
+__src/scripts/main.js__
+
+```javascript
+require('script!react-router/dist/react-router.js')
+
+var Route = ReactRouter.Route;
+var Link = ReactRouter.Link;
+var PhoneCatWrapper = require("./components/PhoneCatWrapper.js")
+var PhoneDetailsWrapper = require("./components/PhoneDetailsWrapper.js")
+
+App = React.createClass({
+  render: function(){
+    return(
+      <div>
+        <ul>
+          <li><Link to="phones">Home</Link></li>
+        </ul>
+        <this.props.activeRouteHandler/>
+      </div>
+    )
+  }
+})
+
+React.renderComponent(
+  (<Route handler={App}>
+      <Route name="phones" handler={PhoneCatWrapper}/>
+      <Route name="phone" path="/phones/:phoneId" handler={PhoneDetailsWrapper} />
+    </Route>), document.getElementById('app'));
+```
+
+Note: Home page will be accessible on - http://127.0.0.1:4000/#/phones
+
+Here we have created an `App` component, that serves as routes handler. In the `render` function
+we are rendering a very basic nav-bar with only Home link. `<this.props.activeRouteHandler/>` renders the
+active route handler. You can read more about activeRouteHandler [here](https://github.com/rackt/react-router/blob/master/docs/guides/overview.md).
+
+Then in `React.renderComponent`, we are defining our routes. Route handler is `App`, `phones` route handler is `PhoneCatWrapper`
+and `phone` route handler is `PhoneDetailsWrapper`. `path="/phones/:phoneId"` makes the `phoneId` accessible to the
+handler via props as we will see later.
+
+Now let's add `PhoneDetailsWrapper` component, copy and paste `section#main` from the `mock_show.html` page to `render` function. Don't forget to
+add `<img>` closing tags and change `class` to `className`!
+
+__src/scripts/components/PhoneDetailsWrapper.js__
+
+```javascript
+var PhoneDetailsWrapper = React.createClass({
+  render: function() {
+    return (
+      <section id="main"><div className="phone-images"><img src="images/phones/motorola-xoom-with-wi-fi.3.jpg" className="phone" />
+      </div>
+      <h1>Motorola XOOM™ with Wi-Fi</h1>
+      <p>Motorola XOOM with Wi-Fi has a super-powerful dual-core processor and Android™ 3.0 (Honeycomb) — the Android platform designed specifically for tablets. With its 10.1-inch HD widescreen display, you’ll enjoy HD video in a thin, light, powerful and upgradeable tablet.</p>
+      <ul className="phone-thumbs"><li><img src="images/phones/motorola-xoom-with-wi-fi.0.jpg" />
+      </li><li><img src="images/phones/motorola-xoom-with-wi-fi.1.jpg" />
+      </li><li><img src="images/phones/motorola-xoom-with-wi-fi.2.jpg" />
+      </li><li><img src="images/phones/motorola-xoom-with-wi-fi.3.jpg" />
+      </li><li><img src="images/phones/motorola-xoom-with-wi-fi.4.jpg" />
+      </li><li><img src="images/phones/motorola-xoom-with-wi-fi.5.jpg" />
+      </li></ul>
+      <ul className="specs"><li>
+          <span>Availability and Networks</span>
+          <dl>
+              <dt>Availability</dt>
+              <dd></dd>
+          </dl>
+      </li>
+
+      <li>
+          <span>Battery</span>
+          <dl>
+              <dt>Type</dt>
+              <dd>Other ( mAH)</dd>
+              <dt>Talk Time</dt>
+              <dd>24 hours</dd>
+              <dt>Standby time (max)</dt>
+              <dd>336 hours</dd>
+          </dl>
+      </li>
+      <!-- code deleted for brevity -->
+      </ul>
+      </section>
+    )
+  }
+});
+
+module.exports = PhoneDetailsWrapper;
+```
+
+__src/scripts/components/Phone.js__
+
+```javascript
+Link = ReactRouter.Link;
+
+var Phone = React.createClass({
+  render: function() {
+    var phone = this.props.phone;
+
+    return (
+      <li className="thumbnail phone-listing">
+        <Link to="phone" phoneId={phone.id} className="thumb" >
+          <img src={phone.imageUrl} />
+        </Link>
+        <Link to="phone" phoneId={phone.id} >
+          {phone.name}
+        </Link>
+        <p>{phone.snippet}</p>
+      </li>
+    )
+  }
+});
+```
+We have modified `Phone` component to include `Link` to the Phone details page.
+So the links on Home page should finally be working!
+
+
+
+## Step-8 PhoneDetails and ImageGallery components
+
+{% include tutorial_headers.html step="8" prev_step="7" %}
+
+{% include tutorial_setup.html step="8" %}
+
+Now let's extract `PhoneDetails` component from `PhoneDetailsWrapper`. We have simply
+moved the `render` method from `PhoneDetailsWrapper` to `PhoneDetails`.
+
+__src/scripts/components/PhoneDetailsWrapper.js__
+
+```javascript
+var PhoneDetails = require("./PhoneDetails.js")
+
+var PhoneDetailsWrapper = React.createClass({
+  render: function() {
+    return (
+      <PhoneDetails />
+    )
+  }
+});
+```
+
+__src/scripts/components/PhoneDetails.js__
+
+```javascript
+var PhoneDetails = React.createClass({
+  render: function() {
+    return (
+      <section id="main"><div className="phone-images"><img src="images/phones/motorola-xoom-with-wi-fi.3.jpg" className="phone" />
+      </div>
+      <h1>Motorola XOOM™ with Wi-Fi</h1>
+      <p>Motorola XOOM with Wi-Fi has a super-powerful dual-core processor and Android™ 3.0 (Honeycomb) — the Android platform designed specifically for tablets. With its 10.1-inch HD widescreen display, you’ll enjoy HD video in a thin, light, powerful and upgradeable tablet.</p>
+
+      <ImageGallery />
+
+      <ul className="specs"><li>
+          <span>Availability and Networks</span>
+          <dl>
+              <dt>Availability</dt>
+              <dd></dd>
+          </dl>
+      </li>
+
+      <li>
+          <span>Battery</span>
+          <dl>
+              <dt>Type</dt>
+              <dd>Other ( mAH)</dd>
+              <dt>Talk Time</dt>
+              <dd>24 hours</dd>
+              <dt>Standby time (max)</dt>
+              <dd>336 hours</dd>
+          </dl>
+      </li>
+      <!-- code deleted for brevity -->
+      </section>
+    )
+  }
+});
+
+module.exports = PhoneDetails;
+```
+
+Let's extract `ImageGallery` component from `PhoneDetails`.
+
+__src/scripts/components/ImageGallery.js__
+
+```javascript
+var ImageGallery = React.createClass({
+  render: function() {
+    return (
+      <ul className="phone-thumbs"><li><img src="images/phones/motorola-xoom-with-wi-fi.0.jpg" />
+      </li><li><img src="images/phones/motorola-xoom-with-wi-fi.1.jpg" />
+      </li><li><img src="images/phones/motorola-xoom-with-wi-fi.2.jpg" />
+      </li><li><img src="images/phones/motorola-xoom-with-wi-fi.3.jpg" />
+      </li><li><img src="images/phones/motorola-xoom-with-wi-fi.4.jpg" />
+      </li><li><img src="images/phones/motorola-xoom-with-wi-fi.5.jpg" />
+      </li></ul>
+    )
+  }
+});
+
+module.exports = ImageGallery;
+```
+
+
+
+
+## Step-9 Get phone details on Ajax
+
+{% include tutorial_headers.html step="9" prev_step="8" %}
+
+{% include tutorial_setup.html step="9" %}
+
+To save us time, instead of using a static `PHONE` array in `PhoneDetailsWrapper`, we are
+directly loading it using Ajax from the server.
+
+__src/scripts/components/PhoneDetailsWrapper.js__
+
+```javascript
+var PhoneDetailsWrapper = React.createClass({
+  getInitialState: function() {
+    return {
+      phone: {
+        images: [],
+        battery: {},
+        storage: {},
+        connectivity: {},
+        android: {},
+        sizeAndWeight: {
+          dimensions: []
+        },
+        display: {},
+        hardware: {},
+        camera: {
+          features: []
+        }
+      }
+    };
+  },
+  componentDidMount: function() {
+    var url;
+    url = "phones/" + this.props.params.phoneId + ".json";
+    return $.getJSON(url, (function(data) {
+      data.phone_image = data.images[0];
+      return this.setState({
+        phone: data
+      });
+    }).bind(this));
+  },
+  render: function() {
+    return <PhoneDetails phone={this.state.phone} />
+  }
+});
+```
+
+We are saving phone details in `PhoneDetailsWrapper` state. `getInitialState` function returns the initial state required
+to render the component.
+
+In `componentDidMount` function we are making the Ajax call using jQuery. rack-router passes url parameters to the component in `this.props.params`
+property, we are using `this.props.params.phoneId` to create the url for the Ajax call. On success we are setting the state with `this.setState`.
+
+Finally, passing the state to `PhoneDetails` as `phone` property.
+
+
+
+
+
+## Step-10 Use props in PhoneDetails
+
+{% include tutorial_headers.html step="10" prev_step="9" %}
+
+{% include tutorial_setup.html step="10" %}
+
+Time to make PhoneDetails dynamic! Let's use the `phone` property.
+
+__src/scripts/components/PhoneDetails.js__
+
+```javascript
+var PhoneDetails = React.createClass({
+  checkmark: function(truthy) {
+    if (truthy) {
+      return String.fromCharCode(10003);
+    } else {
+      return String.fromCharCode(10008);
+    }
+  },
+
+  render: function() {
+    var phone = this.props.phone;
+    var dimensions = phone.sizeAndWeight.dimensions.map(function(dimension, i) {
+      return <dd key={i}>{ dimension }</dd>;
+    });
+
+    return (
+      <section id="main">
+        <div className="phone-images">
+          <img ref="phone_image" src={ this.props.phone.images[0]} className="phone" />
+        </div>
+        <h1>{phone.name}</h1>
+        <p>{phone.description}</p>
+
+        <ImageGallery />
+
+        <ul className="specs">
+          <li>
+              <span>Availability and Networks</span>
+              <dl>
+                  <dt>Availability</dt>
+                  <dd>{ phone.availability }</dd>
+              </dl>
+          </li>
+          <!-- code deleted for brevity -->
+          <li>
+              <span>Connectivity</span>
+              <dl>
+                  <dt>Network Support</dt>
+                  <dd>{ phone.connectivity.cell }</dd>
+                  <dt>WiFi</dt>
+                  <dd>{ phone.connectivity.wifi }</dd>
+                  <dt>Bluetooth</dt>
+                  <dd>{ phone.connectivity.bluetooth }</dd>
+                  <dt>Infrared</dt>
+                  <dd>{ this.checkmark(phone.connectivity.infrared) }</dd>
+                  <dt>GPS</dt>
+                  <dd>{ this.checkmark(phone.connectivity.gps) }</dd>
+              </dl>
+          </li>
+          <!-- code deleted for brevity -->
+          <li>
+              <span>Size and Weight</span>
+              <dl>
+                  <dt>Dimensions</dt>
+                    { dimensions }
+                  <dt>Weight</dt>
+                  <dd>{ phone.sizeAndWeight.weight }</dd>
+              </dl>
+          </li>
+          <!-- code deleted for brevity -->
+      </section>
+    );
+  }
+});
+```
+There is nothing new here, except the `checkmark` function. JSX has [issues](http://facebook.github.io/react/docs/jsx-gotchas.html)
+displaying HTML entities. There are various workarounds, we are going ahead with using `String.fromCharCode`. The `checkmark` function simply
+returns &#x2713; if the parameter `truthy` is true otherwise &#10008;.
+
+You should see phone details dynamically populated.
+
+
+
+
+## Step-11 Use props in ImageGallery
+
+{% include tutorial_headers.html step="11" prev_step="10" %}
+
+{% include tutorial_setup.html step="11" %}
+
+Phone images are still not showing up in the gallery, let's do something about it!
+
+__src/scripts/components/ImageGallery.js__
+
+```javascript
+var ImageGallery = React.createClass({
+  render: function() {
+    var images = this.props.images.map(function(image_path, i) {
+      return <li key={i}><img src={image_path} /> </li>;
+    });
+
+    return (
+      <ul className="phone-thumbs">
+        {images}
+      </ul>
+    );
+  }
+});
+
+module.exports = ImageGallery;
+```
+Nothing ground-breaking here, we are simply creating an array of images and rendering it.
+
+Don't forget to pass the `images` property to `ImageGallery` in `PhoneDetails`!
+
+
+__src/scripts/components/PhoneDetails.js__
+
+```javascript
+.
+.
+        <ImageGallery images={phone.images} />
+.
+.
+```
+
+
+Now you should see the dynamic thumbnails.
+
+
+
+## Step-12 Make thumbnail click work
+
+{% include tutorial_headers.html step="12" prev_step="11" %}
+
+{% include tutorial_setup.html step="12" %}
+
+Now we have everything in place, except thumbnail click is not working.
+Time to decide what should go in the state... the only thing user can do is
+click the thumbnail to change main image of the phone. We will save
+`active_image` url in the state and change it on thumbnail click.
+
+
+__src/scripts/components/PhoneDetails.js__
+
+```javascript
+var PhoneDetails = React.createClass({
+
+  getInitialState: function() {
+    return {
+      active_image: ''
+    }
+  },
+  .
+  .
+  .
+
+  handleThumbClick: function(image_path) {
+    this.setState( {
+        active_image: image_path
+      }
+    )
+  },
+
+  render: function() {
+    var phone = this.props.phone;
+    var dimensions = phone.sizeAndWeight.dimensions.map(function(dimension, i) {
+      return <dd key={i}>{ dimension }</dd>;
+    });
+
+    return (
+      <section id="main">
+        .
+        .
+        <ImageGallery images={phone.images} handleThumbClick={this.handleThumbClick} />
+        .
+        .
+      </section>
+    );
+  }
+});
+```
+The `handleThumbClick` function sets `active_image` state, and we are passing it's reference to the `ImageGallery` as a property.
+So it can tell when/which thumbnail is clicked.
+
+
+__src/scripts/components/ImageGallery.js__
+
+```javascript
+var ImageGallery = React.createClass({
+  handleClick: function(e) {
+    return this.props.handleThumbClick(e.target.src);
+  },
+
+  render: function() {
+    var images = this.props.images.map(function(image_path, i) {
+      return <li key={i}><img src={image_path} /> </li>;
+    });
+
+    return (
+      <ul className="phone-thumbs" onClick={this.handleClick}>
+        {images}
+      </ul>
+    );
+  }
+});
+```
+
+In `ImageGallery` we wrote an `onClick` handler `handleClick`.
+The `handleClick` function, invokes `this.props.handleThumbClick` function
+which points to `PhoneDetails` function `handleThumbClick`.
+
+Now you should see the fully functional app in action!
+
+That's it! We are finally done!! Please let me know your feedback/suggestions/critics in comments
+or mail me at [girish@cuberoot.in](mailto:girish@cuberoot.in)
