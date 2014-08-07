@@ -8,6 +8,8 @@ author: Girish
 In this post, we are going to re-implement the Angular JS [PhoneCat tutorial](https://docs.angularjs.org/tutorial)
 in React JS.
 
+{% include tutorial_headers.html step="6" demo_text="Live Final Demo" %}
+
 ## About React JS
 [React JS](http://facebook.github.io/react/) for the uninitiated, is a javascript framework from Facebook. Most commonly used as a V in MVC.
 React uses Virtual DOM, an in-memory representation of the browser DOM, making it possible to re-render our entire app on every data change.
@@ -73,41 +75,52 @@ PhoneCat is a catalog of Android devices, which you can filter, sort and see det
 
 ![alt text](/public/images/phonecat/catalog_screen.png)
 
-Click [Final Demo] TODO to see what we are going build at the end of the tutorial.
+To see what we are going build at the end of the tutorial.
 
-## 0 Bootstrapping
+{% include tutorial_headers.html step="6" demo_text="Live Final Demo" %}
 
-{% include tutorial_headers.html step="1" prev_step="0~1" %}
+## Step 0 Bootstrapping
 
-[reactjs-phonecat](TODO) is git repo for this tutorial. Clone the repo and execute following commands in the project directory
+{% include tutorial_headers.html step="0" prev_step="0~2" %}
+
+Tutorial sources are available at [reactjs-phonecat](https://github.com/girishso/reactjs-phonecat).
+We are using [node.js](http://nodejs.org/) as local server
+and [gulp.js](http://gulpjs.com/) as build tool.
+
+Clone the repo and execute following commands in the project directory
 
 ```
-git checkout -f step-0
-npm install
-bower install
+$ git clone https://github.com/girishso/reactjs-phonecat#
+$ cd reactjs-phonecat
+$ git checkout -f step-0
+$ npm install
+$ bower install
 ```
 
 Once successfully done, you can run the server by executing
 
 ```
-gulp dev
+$ gulp dev
 ```
 
 Goto http://127.0.0.1:4000/ in your browser. You should see a success message.
 
-## 1 Mockups
+## Step-1 Mockups
+
+{% include tutorial_headers.html step="1" prev_step="0" demo_page="mock_index.html" demo_text="Mock home page" %}
+{% include tutorial_headers.html step="1" demo_page="mock_show.html" demo_text="Mock phone page" %}
+
 Let's start with the mockups of the actual pages we are going to create.
 
-```
-git checkout -f step-1
-```
+{% include tutorial_setup.html step="1" %}
+
 We have added html mockups, stylesheets and images. You can see the mockups here
 
 
-[http://127.0.0.1:4000/mock_index.html](http://127.0.0.1:4000/mock_index.html)
+http://127.0.0.1:4000/mock_index.html
 
 
-[http://127.0.0.1:4000/mock_show.html](http://127.0.0.1:4000/mock_show.html)
+http://127.0.0.1:4000/mock_show.html
 
 
 ### PhoneCat components
@@ -127,7 +140,12 @@ Here is our components hierarchy -
 ```
 
 
-## 2 PhoneCatWrapper component
+## Step-2 PhoneCatWrapper component
+
+{% include tutorial_headers.html step="2" prev_step="1" %}
+
+{% include tutorial_setup.html step="2" %}
+
 Let's modify `index.html`, and use it as layout for the app.
 
 __src/index.html__
@@ -186,7 +204,7 @@ var PhoneCatWrapper = React.createClass({
         <div class="col-md-10">
           <ul class="phones">
           <li class="thumbnail phone-listing">
-            <a href="#/phones/motorola-xoom-with-wi-fi" class="thumb"><img src="/images/phones/motorola-xoom-with-wi-fi.0.jpg"></a>
+            <a href="#/phones/motorola-xoom-with-wi-fi" class="thumb"><img src="images/phones/motorola-xoom-with-wi-fi.0.jpg"></a>
             <a href="#/phones/motorola-xoom-with-wi-fi" >Motorola XOOM™ with Wi-Fi</a>
             <p>The Next, Next Generation
 
@@ -215,7 +233,12 @@ with `className`.
 
 Now it's working as expected!
 
-## 3 Extract all static components
+## Step-3 Extract all static components
+
+{% include tutorial_headers.html step="3" prev_step="2" %}
+
+{% include tutorial_setup.html step="3" %}
+
 To speedup the things,
 let's extract all the remaining components from `PhoneCatWrapper`. Note that all these components
 have static html.
@@ -299,7 +322,7 @@ var Phone = React.createClass({
   render: function() {
     return (
       <li className="thumbnail phone-listing">
-        <a href="#/phones/motorola-xoom-with-wi-fi" className="thumb"><img src="/images/phones/motorola-xoom-with-wi-fi.0.jpg" /></a>
+        <a href="#/phones/motorola-xoom-with-wi-fi" className="thumb"><img src="images/phones/motorola-xoom-with-wi-fi.0.jpg" /></a>
         <a href="#/phones/motorola-xoom-with-wi-fi" >Motorola XOOM™ with Wi-Fi</a>
         <p>The Next, Next Generation
 
@@ -342,7 +365,12 @@ module.exports = SearchForm;
 ```
 
 
-## 4 Add dynamism
+## Setp-4 Add dynamism
+
+{% include tutorial_headers.html step="4" prev_step="3" %}
+
+{% include tutorial_setup.html step="4" %}
+
 Enough of static components, let's make 'em dynamic!
 
 Enter `props`. `props` (short for properties) is how components talk to each other.
@@ -359,14 +387,14 @@ var PHONES = [
     {
         "age": 0,
         "id": "motorola-xoom-with-wi-fi",
-        "imageUrl": "/images/phones/motorola-xoom-with-wi-fi.0.jpg",
+        "imageUrl": "images/phones/motorola-xoom-with-wi-fi.0.jpg",
         "name": "Motorola XOOM\u2122 with Wi-Fi",
         "snippet": "The Next, Next Generation\r\n\r\nExperience the future with Motorola XOOM with Wi-Fi, the world's first tablet powered by Android 3.0 (Honeycomb)."
     },
     {
         "age": 1,
         "id": "motorola-xoom",
-        "imageUrl": "/images/phones/motorola-xoom.0.jpg",
+        "imageUrl": "images/phones/motorola-xoom.0.jpg",
         "name": "MOTOROLA XOOM\u2122",
         "snippet": "The Next, Next Generation\n\nExperience the future with MOTOROLA XOOM, the world's first tablet powered by Android 3.0 (Honeycomb)."
     },
@@ -374,14 +402,14 @@ var PHONES = [
         "age": 2,
         "carrier": "AT&T",
         "id": "motorola-atrix-4g",
-        "imageUrl": "/images/phones/motorola-atrix-4g.0.jpg",
+        "imageUrl": "images/phones/motorola-atrix-4g.0.jpg",
         "name": "MOTOROLA ATRIX\u2122 4G",
         "snippet": "MOTOROLA ATRIX 4G the world's most powerful smartphone."
     },
     {
         "age": 3,
         "id": "dell-streak-7",
-        "imageUrl": "/images/phones/dell-streak-7.0.jpg",
+        "imageUrl": "images/phones/dell-streak-7.0.jpg",
         "name": "Dell Streak 7",
         "snippet": "Introducing Dell\u2122 Streak 7. Share photos, videos and movies together. It\u2019s small enough to carry around, big enough to gather around."
     }
@@ -470,7 +498,12 @@ var Phone = React.createClass({
 In `Phone` we are using the `phone` property to assign the image, name and snippet.
 Let's worry about the links when we deal with the `PhoneDetails` component.
 
-## 5 Filter and Sort
+## Step-5 Filter and Sort
+
+{% include tutorial_headers.html step="5" prev_step="4" %}
+
+{% include tutorial_setup.html step="5" %}
+
 Now that we have a dynamically generated app. Let's add filter and sort features.
 
 This is the time to identify the app state. Go through [this](http://facebook.github.io/react/docs/thinking-in-react.html#step-3-identify-the-minimal-but-complete-representation-of-ui-state)
@@ -604,7 +637,12 @@ The `render` function of `PhonesList`, filters the `phones` property using
 [jQuery.grep](http://api.jquery.com/jquery.grep/). Then sorts the filtered
 phones using javascript [sort](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) function.
 
-## 6 Ajax
+## Step-6 Ajax
+
+{% include tutorial_headers.html step="6" prev_step="5" %}
+
+{% include tutorial_setup.html step="6" %}
+
 In this step we will get the data from our JSON API. There is no API for the tutorial, we will
 just fetch `/phones/phones.json` from the server.
 

@@ -1,13 +1,19 @@
 <ul class="tutorial_header">
-  <a href="http://angular.github.io/angular-phonecat/step-{{ include.step }}/app">
+  <a href="http://girishso.github.io/reactjs-phonecat/step-{{ include.step }}/{{ include.demo_page }}" target="blank">
     <li class="">
-      Live Demo
+      {% if include.demo_text %}
+        {{ include.demo_text }}
+      {% else %}
+        Live Demo
+      {% endif %}
     </li>
   </a>
 
-  <a href="https://github.com/angular/angular-phonecat/compare/step-{{ include.prev_step }}...step-{{ include.step }}">
-    <li class="">
-      Code Diff
-    </li>
-  </a>
+  {% if include.prev_step %}
+    <a href="https://github.com/girishso/reactjs-phonecat/compare/step-{{ include.prev_step }}...step-{{ include.step }} target="blank"">
+      <li class="">
+        Code Diff
+      </li>
+    </a>
+  {% endif %}
 </ul>
