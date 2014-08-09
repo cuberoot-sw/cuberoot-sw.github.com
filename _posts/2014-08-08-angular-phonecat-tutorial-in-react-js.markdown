@@ -46,9 +46,7 @@ Developing apps in React requires different thinking than other [typical](https:
 ### React JS Primer
 #### Components Not Templates
 Enough treating Views as strings. React uses javascript objects (called components) to represent the app markup.
-Components facilitate separation of concerns and can be unit tested in isolation. We are not doing any testing in this tutorial
-(very bad, I know!).
-Click [here](http://facebook.github.io/react/docs/test-utils.html) are interested in React testing.
+Components facilitate separation of concerns and can be unit tested in isolation.
 
 React components are created with `React.createClass` method. Every component must implement a `render` method.
 
@@ -1245,4 +1243,4 @@ which points to `PhoneDetails` function `handleThumbClick`.
 Now you should see the fully functional app in action!
 
 That's it! We are finally done!! Please let me know your feedback/suggestions/critics in comments
-or mail me at [girish@cuberoot.in](mailto:girish@cuberoot.in)
+or mail me at __girish at cuberoot dot in__
