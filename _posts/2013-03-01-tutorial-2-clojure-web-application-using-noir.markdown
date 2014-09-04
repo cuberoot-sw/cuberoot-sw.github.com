@@ -12,7 +12,8 @@ Noir.
 
 Open `src/finance_manager/views/welcome.clj` file write following code
 in it.
-```clojure
+
+```
 (:require [noir.validation :as vali])
 
 (defn valid-budget? [{:keys [budget_date budget_amt]}]
@@ -26,20 +27,24 @@ The above function will check that all the fields confirm to the rules,
 such as budget_date and budget_amt are provided.
 
 The rule have following form:
-```clojure
+
+```
   (rule passed? [field error])
 ```
+
 If the passed? condition is not met, add the error text to the given field.
 
 We will need a helper for displaying the error on the page:
-```clojure
+
+```
 (defpartial error-item [[first-error]]
   [:p.error first-error]
 )
 ```
  
 Modify the `/addbudget` page as:
-```clojure
+
+```
 (defpage "/addbudget" {:keys [error]}
    (common/layout
      [:h2 "Add Monthly Budget"]
@@ -65,7 +70,8 @@ Modify the `/addbudget` page as:
 <!-- more -->
 
 Modify the `[:post "/addbudget"]` page as:
-```clojure
+
+```
 (defpage [:post "/addbudget"] budget
   (if (valid-budget? budget)
      (let
