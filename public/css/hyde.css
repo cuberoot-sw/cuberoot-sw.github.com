@@ -559,7 +559,7 @@ border-radius: 3px;
 }
 .highlight {
   max-height: 550px;
-  overflow: overlay;
+  overflow: scroll;
 }
 
 p a {
