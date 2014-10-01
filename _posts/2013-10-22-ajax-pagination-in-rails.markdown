@@ -6,6 +6,7 @@ comments: true
 author: Deepali
 redirect_from: 
   - /2013/10/22/ajax-pagination-in-rails/
+  - /blog/2013/10/22/ajax-pagination-in-rails/
 
 ---
 In this blog post we will see how to apply rails pagination on Ajax.

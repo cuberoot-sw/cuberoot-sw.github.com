@@ -6,6 +6,7 @@ author: Deepali
 categories: 
 redirect_from: 
   - /2013/02/27/clojure-web-application-using-noir/
+  - /blog/2013/02/27/clojure-web-application-using-noir/
 
 ---
 

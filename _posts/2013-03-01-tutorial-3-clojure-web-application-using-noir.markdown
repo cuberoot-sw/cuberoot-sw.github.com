@@ -7,6 +7,7 @@ author: Deepali
 categories: 
 redirect_from: 
   - /2013/03/01/tutorial-3-clojure-web-application-using-noir/
+  - /blog/2013/03/01/tutorial-3-clojure-web-application-using-noir/
 
 ---
 

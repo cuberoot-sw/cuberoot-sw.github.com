@@ -7,6 +7,7 @@ author: Prachi
 categories:
 redirect_from: 
   - /2013/03/12/issues-while-deploying-rails-app-on-production/
+  - /blog/2013/03/12/issues-while-deploying-rails-app-on-production/
 
 ---
 

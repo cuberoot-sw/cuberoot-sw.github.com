@@ -7,6 +7,7 @@ categories:
 author: Girish
 redirect_from: 
   - /2013/09/16/guest-blog-post-on-rubylearning-dot-com/
+  - /blog/2013/09/16/guest-blog-post-on-rubylearning-dot-com/
 
 ---
 [Satish Talim](http://satishtalim.com/) of [RubyLearning](http://rubylearning.com/) 

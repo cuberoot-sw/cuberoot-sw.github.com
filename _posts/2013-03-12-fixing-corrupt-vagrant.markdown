@@ -7,6 +7,7 @@ author: Meghali Dhoble
 categories: 
 redirect_from: 
   - /2013/03/12/fixing-corrupt-vagrant/
+  - /blog/2013/03/12/fixing-corrupt-vagrant/
 
 ---
 

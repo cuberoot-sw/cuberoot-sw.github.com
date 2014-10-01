@@ -6,6 +6,7 @@ author: Girish
 categories: 
 redirect_from: 
   - /2013/02/15/hello-world/
+  - /blog/2013/02/15/hello-world/
 
 ---
 

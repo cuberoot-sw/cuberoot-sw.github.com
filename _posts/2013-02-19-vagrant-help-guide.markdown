@@ -7,6 +7,7 @@ author: Meghali
 categories: 
 redirect_from: 
   - /2013/02/19/vagrant-help-guide/
+  - /blog/2013/02/19/vagrant-help-guide/
 
 ---
 This blog post is about setting up a vagrant box. Vagrants are useful to preserve the app-configurations 

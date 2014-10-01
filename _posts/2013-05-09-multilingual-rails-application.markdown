@@ -7,6 +7,7 @@ author: Prachi
 categories:
 redirect_from: 
   - /2013/05/09/multilingual-rails-application/
+  - /blog/2013/05/09/multilingual-rails-application/
 
 ---
 

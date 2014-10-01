@@ -6,6 +6,7 @@ author: Prachi
 categories:
 redirect_from: 
   - /2013/02/27/rails-memcacheing-using-dalli/
+  - /blog/2013/02/27/rails-memcacheing-using-dalli/
 ---
 
 Dalli is a High performance memcached client for Ruby.

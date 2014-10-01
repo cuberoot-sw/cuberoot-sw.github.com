@@ -7,6 +7,7 @@ author: Prachi
 categories: 
 redirect_from: 
   - /2013/09/03/change-currency-symbol-in-spree/
+  - /blog/2013/09/03/change-currency-symbol-in-spree/
 
 ---
 

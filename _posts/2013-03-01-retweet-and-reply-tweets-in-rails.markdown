@@ -7,6 +7,7 @@ author: Prachi
 categories:
 redirect_from: 
   - /2013/03/01/retweet-and-reply-tweets-in-rails/
+  - /blog/2013/03/01/retweet-and-reply-tweets-in-rails/
 
 ---
 

@@ -7,6 +7,7 @@ categories:
 author: Girish
 redirect_from: 
   - /2013/11/21/install-pg-gem-on-mac-osx-mavericks-with-postgres-app/
+  - /blog/2013/11/21/install-pg-gem-on-mac-osx-mavericks-with-postgres-app/
 ---
 
 When I was trying to install `pg` gem on OSX Mavericks it failed with

@@ -6,6 +6,7 @@ comments: true
 author: Prachi
 redirect_from: 
   - /2013/10/22/shorten-urls-using-bit-dot-ly-api-in-rails/
+  - /blog/2013/10/22/shorten-urls-using-bit-dot-ly-api-in-rails/
 
 ---
 

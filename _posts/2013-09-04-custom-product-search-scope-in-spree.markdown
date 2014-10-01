@@ -6,6 +6,7 @@ comments: true
 author: Deepali
 redirect_from: 
   - /2013/09/04/custom-product-search-scope-in-spree/
+  - /blog/2013/09/04/custom-product-search-scope-in-spree/
 
 ---
 
