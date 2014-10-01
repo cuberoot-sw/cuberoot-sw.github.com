@@ -4,7 +4,9 @@ title: "Shorten URL'S using bit.ly API in Rails"
 date: 2013-10-22 10:53
 comments: true
 author: Prachi
-categories: 
+redirect_from: 
+  - /2013/10/22/shorten-urls-using-bit-dot-ly-api-in-rails/
+
 ---
 
 In this blog we are going to create shorten URL's in rails application using Bit.ly API in ruby step by step.
@@ -57,4 +59,3 @@ You can then use that client to shorten or expand urls :
 ```
 
 And it is done!
-

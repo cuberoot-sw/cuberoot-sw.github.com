@@ -5,6 +5,9 @@ date: 2013-03-01 11:25
 comments: true
 author: Deepali
 categories: 
+redirect_from: 
+  - /2013/03/01/tutorial-3-clojure-web-application-using-noir/
+
 ---
 
 In this tutorial we are going to cover how to manage a Session in
@@ -174,4 +177,3 @@ Now create a page for logout to clear the session in
 ```
 
 `session/clear!` Remove all data from the session.
-

@@ -4,7 +4,9 @@ title: "Ajax Pagination In Rails"
 date: 2013-10-22 10:47
 comments: true
 author: Deepali
-categories: 
+redirect_from: 
+  - /2013/10/22/ajax-pagination-in-rails/
+
 ---
 In this blog post we will see how to apply rails pagination on Ajax.
 Here, I am doing pagination using `kaminari`.

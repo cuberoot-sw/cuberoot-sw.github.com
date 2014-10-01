@@ -5,6 +5,9 @@ date: 2013-09-03 15:53
 comments: true
 author: Prachi
 categories: 
+redirect_from: 
+  - /2013/09/03/change-currency-symbol-in-spree/
+
 ---
 
 I am using spree 1.3.3 in my rails application with INR currency and want to convert its symbol to '&#8377;'
@@ -56,6 +59,3 @@ In `/lib/spree/money_decorator.rb`
 
 
 Now it works, the money gem takes care of :symbol and use it to convert to currency with our custom_symbol '&#8377;'
-
-
-

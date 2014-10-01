@@ -2,10 +2,20 @@ title:        "Coding Tidbits"
 tagline:      "Coding Tidbits"
 url:          http://blog.cuberoot.in
 markdown:     redcarpet
-permalink:    /:title
-pygments:     true
+permalink:  /:title
+highlighter:     true
 paginate:     10
 excerpt_separator: "<!-- more -->"
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Mr. Hyde"
+      category: "project"
+
 
 disqus_short_name : cuberootblog
 

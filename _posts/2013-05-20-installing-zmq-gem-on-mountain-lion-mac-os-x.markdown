@@ -2,9 +2,10 @@
 layout: post
 title: "Installing zmq gem on Mountain Lion Mac OS X"
 date: 2013-05-20 15:55
-comments: true
-categories: 
 author: Girish
+comments: true
+redirect_from: 
+  - /2013/05/20/installing-zmq-gem-on-mountain-lion-mac-os-x/
 ---
 
 I decided to play with [ZeroMQ](http://www.zeromq.org) on my Mac. Had to spend about an hour installing the `zmq` gem, hope this post saves you the trouble.

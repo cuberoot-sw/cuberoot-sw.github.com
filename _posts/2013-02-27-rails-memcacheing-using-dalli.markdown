@@ -4,6 +4,8 @@ title: "Rails Memcacheing using Dalli"
 date: 2013-02-27 15:23
 author: Prachi
 categories:
+redirect_from: 
+  - /2013/02/27/rails-memcacheing-using-dalli/
 ---
 
 Dalli is a High performance memcached client for Ruby.
@@ -83,5 +85,3 @@ To expire cache in  day :
 ```
 
 Now, you can cache data by using Rails Cache .
-
-

@@ -4,7 +4,9 @@ title: "Custom product search scope in spree"
 date: 2013-09-04 10:36
 comments: true
 author: Deepali
-categories: 
+redirect_from: 
+  - /2013/09/04/custom-product-search-scope-in-spree/
+
 ---
 
 I am using Spree 1.3.3 and I want to modify the product search scope in

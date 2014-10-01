@@ -5,6 +5,9 @@ date: 2013-03-12 16:59
 comments: true
 author: Prachi
 categories:
+redirect_from: 
+  - /2013/03/12/issues-while-deploying-rails-app-on-production/
+
 ---
 
 In this blog we are going through some issues which I faced while upgrading `gem twitter` and their fixes while deploying rails app on production.

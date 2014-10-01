@@ -5,6 +5,9 @@ date: 2013-03-01 11:29
 comments: true
 author: Prachi
 categories:
+redirect_from: 
+  - /2013/03/01/retweet-and-reply-tweets-in-rails/
+
 ---
 
 I had to add feature for reply and retweet in [www.rubybeats.com](http://rubybeats.com/) site.
@@ -61,4 +64,3 @@ Reply the specified Tweet :
   [https://dev.twitter.com/docs/api/1.1/post/statuses/retweet/:id](https://dev.twitter.com/docs/api/1.1/post/statuses/retweet/:id)
 
   [http://rdoc.info/gems/twitter](http://rdoc.info/gems/twitter)
-

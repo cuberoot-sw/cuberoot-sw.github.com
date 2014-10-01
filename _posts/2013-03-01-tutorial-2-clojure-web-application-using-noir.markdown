@@ -5,6 +5,8 @@ date: 2013-03-01 10:53
 comments: true
 author: Deepali
 categories: 
+redirect_from: 
+  - /2013/03/01/tutorial-2-clojure-web-application-using-noir/
 ---
 
 In this tutorial we are going to cover how to apply form validations in

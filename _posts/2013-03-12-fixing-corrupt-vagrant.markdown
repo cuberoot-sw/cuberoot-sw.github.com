@@ -5,6 +5,9 @@ date: 2013-03-12 12:19
 comments: true
 author: Meghali Dhoble
 categories: 
+redirect_from: 
+  - /2013/03/12/fixing-corrupt-vagrant/
+
 ---
 
 Recently my vagrant machine crashed. This is how I used 'fsck' to recover it.

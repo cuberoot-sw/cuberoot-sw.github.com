@@ -4,6 +4,9 @@ title: "Tutorial 1 - Clojure Web Application Using Noir"
 date: 2013-02-27 15:24
 author: Deepali
 categories: 
+redirect_from: 
+  - /2013/02/27/clojure-web-application-using-noir/
+
 ---
 
 I am going to do a series of blog posts on using Noir framework to create a simple website. Here is part 1 of the tutorial.

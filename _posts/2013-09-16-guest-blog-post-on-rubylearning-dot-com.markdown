@@ -5,6 +5,9 @@ date: 2013-09-16 10:27
 comments: true
 categories: 
 author: Girish
+redirect_from: 
+  - /2013/09/16/guest-blog-post-on-rubylearning-dot-com/
+
 ---
 [Satish Talim](http://satishtalim.com/) of [RubyLearning](http://rubylearning.com/) 
 recently invited me to write a guest blog post on my [GoogCurrency](https://rubygems.org/gems/goog_currency) gem

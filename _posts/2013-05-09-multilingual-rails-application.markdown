@@ -5,6 +5,9 @@ date: 2013-05-09 15:47
 comments: true
 author: Prachi
 categories:
+redirect_from: 
+  - /2013/05/09/multilingual-rails-application/
+
 ---
 
 In rails application, I want to make it multilingual. We need to define YAML language files for all required languages and tell the Rails application which language it should currently use.
@@ -96,12 +99,3 @@ Putting translations for all parts of an application in one file per locale coul
 |-----de.rb
 |-----en.rb
 ```
-
-
-
-
-
-
-
-
-
