@@ -3,7 +3,7 @@ tagline:      "Coding Tidbits"
 url:          http://blog.cuberoot.in
 markdown:     redcarpet
 permalink:  /:title
-highlighter:     true
+highlighter:     pygments
 paginate:     10
 excerpt_separator: "<!-- more -->"
 defaults:
