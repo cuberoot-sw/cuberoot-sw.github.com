@@ -1,6 +1,7 @@
 title:        "Coding Tidbits"
 tagline:      "Coding Tidbits"
 url:          http://blog.cuberoot.in
+baseurl:      /
 markdown:     kramdown
 permalink:  /:title
 highlighter:     rouge
