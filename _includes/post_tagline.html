@@ -1,6 +1,12 @@
 <span class="post-date">
-  Posted by: {{ include.post.author }}
+  Posted by: <a href="/authors/{{ include.post.author | downcase }}.html">{{ include.post.author }}</a>
   | {{ include.post.date | date_to_string }}
   | <a href="{{ site.url }}{{ include.post.url }}#disqus_thread">Comments</a>
+<!--
+{% assign author = site.posts | where: "author", "Girish" %}
+{% for post in author %}
+Posted by: {{ post.title }}
+{% endfor %} -->
 </span>
+
 

@@ -1,0 +1,10 @@
+<div class="post">
+  <h1>Posts by {{ include.author }}</h1>
+  <ul id="blog-archives">
+	{% for post in site.posts %}
+	  	{% if post.author == include.author %}
+	      <li><time>{{ post.date | date:"%b %d" }}</time> <a href="{{ post.url }}">{{ post.title }}</a></li>
+		{% endif %}
+	{% endfor %}
+  </ul>
+</div>

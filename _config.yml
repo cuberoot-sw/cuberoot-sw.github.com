@@ -38,19 +38,22 @@ sitemap:
 
 github_projects:
   -
-    name: phant_rb
-    url : https://github.com/girishso/phant_rb
+    name: pluck_to_hash
+    url : https://github.com/girishso/pluck_to_hash
   -
-    name: kipwiki
-    url : https://github.com/girishso/kipwiki
+    name: Online Elm Repl
+    url : https://github.com/girishso/elm-repl-in-browser
   -
-    name: mindflowy
+    name: Indian Chess in Elm
+    url : https://github.com/girishso/indian-chess
+  -
+    name: Your digital brain
     url : https://github.com/girishso/mindflowy
-  -
-    name: jiralicious
-    url : https://github.com/girishso/jiralicious
 
 rubygems:
+  -
+    name: pluck_to_hash
+    url : https://rubygems.org/gems/pluck_to_hash
   -
     name: spree-custom-notifications
     url : http://rubygems.org/gems/spree_custom_notifications
