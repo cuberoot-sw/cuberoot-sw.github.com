@@ -1,9 +1,10 @@
 title:        "Coding Tidbits"
 tagline:      "Coding Tidbits"
 url:          http://blog.cuberoot.in
-markdown:     redcarpet
+baseurl:      /
+markdown:     kramdown
 permalink:  /:title
-highlighter:     pygments
+highlighter:     rouge
 paginate:     10
 excerpt_separator: "<!-- more -->"
 defaults:
